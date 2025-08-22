@@ -1,0 +1,102 @@
+---
+import { getStaticPaths, useTranslations } from "@/i18n/i18n";
+import Typo from "../typography/Typo.astro";
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as "en" | "it");
+---
+
+<div class="hero">
+  <h1 class="title">
+    <span>Handmade</span>
+    <span>design</span>
+    <span><em>&</em>develop</span>
+  </h1>
+  <Typo class="text" text={t('home.hero.text')} tag="p" color="accent" balancer/>
+</div>
+
+<style lang="scss">
+@use '@/styles/mixins/media';
+.hero {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: var(--s-xxl);
+  padding-bottom: 7.5rem;
+  padding-inline: var(--s-xxl);
+
+  @include media.media(lg) {
+    padding-inline: var(--s-big);
+  }
+
+  .title {
+    width: 100%;
+    grid-column: 1/7;
+    grid-row: 1/4;
+    display: flex;
+    flex-direction: column;
+    font-size: 14vw;
+    font-weight: var(--fw-black);
+    text-transform: uppercase;
+    line-height: 0.8;
+    position: relative;
+  }
+
+  .title > *{
+    width: fit-content;
+    align-self: center;
+  }
+
+  .title *:nth-child(2){
+    animation: slideLeft 2s ease-out forwards;
+  }
+
+  @keyframes slideLeft {
+    to {
+      translate: -35.5% 0;
+    }
+  }
+
+  .title *:nth-child(3){
+    animation: slideRight 2s ease-out 0.25s forwards;
+  }
+
+  @keyframes slideRight {
+    to {
+      translate: 12% 0;
+    }
+  }
+
+  em {
+    display: inline-block;
+    font-weight: var(--fw-semi);
+    font-size: 12vw;
+    font-style: normal;
+    color: var(--c-accent);
+    animation: slideUp 1s ease-out 1s forwards;
+  }
+
+  @keyframes slideUp {
+    to {
+      translate: 30% -40%;
+    }
+  }
+
+  :global(.text) {
+    font-size: 3.25vw !important;
+    grid-column: 4/7;
+    grid-row: 2/3;
+    align-self: center;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 1.25s forwards;
+    translate: 5% 0;
+  }
+
+  @keyframes fadeIn {
+    to {
+      translate: 0 0;
+      opacity: 1;
+    }
+  }
+}
+</style>

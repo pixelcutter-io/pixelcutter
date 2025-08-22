@@ -1,0 +1,46 @@
+---
+import Logo from "@/assets/icons/logo.svg";
+import Button from "@/components/Button.astro";
+import LangSwitch from "@/components/LangSwitch.astro";
+import { useTranslations } from "@/i18n/i18n";
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as 'en' | 'it');
+---
+
+<header class="header">
+  <a href={`/${lang}/`}>
+    <Logo height={'var(--s-xxl)'} fill={'var(--c-secondary)'}/>
+  </a>
+  <nav class="nav">
+    <Button label={t('action.about')} href={`/${lang}/about`} theme="text" size="big" labelColor="secondary" hoverLabelColor="secondary" />
+    <Button label={t('action.projects')} href={`/${lang}/projects`} theme="text" size="big" labelColor="secondary" hoverLabelColor="secondary" />
+    <Button label={t('action.contact')} href={`/${lang}/contacts`} size="big" />
+  </nav>
+  <LangSwitch currentLang={lang as 'en' | 'it'} />
+</header>
+
+<style lang="scss">
+.header {
+  height: 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s-df);
+  padding-inline: var(--s-big);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-index-2);
+  background-color: var(--c-primary);
+}
+
+.nav {
+  margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--s-xxl);
+}
+</style>

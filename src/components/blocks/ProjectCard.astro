@@ -1,0 +1,80 @@
+---
+import MarkdownText from "../typography/MarkdownText.astro";
+import Typo from "../typography/Typo.astro";
+
+interface Props {
+	logo?: string;
+	title: string;
+	excerpt?: string;
+	cover?: string;
+	date?: string;
+	url: string;
+}
+
+const { logo, title, url, excerpt, cover, date } = Astro.props;
+---
+
+<a href={url}>
+  <article class="card">
+    {date && <Typo class="date" text={date} weight="semi" color="accent" size={['lg', 'xxl']}/> }
+    {title && <Typo class="title" text={title} tag="h3" weight="black" color="secondary" size={['tr', 'qt']} balancer/> }
+    {logo && <img class="logo" src={logo}  />}
+    {excerpt && <MarkdownText class="excerpt" text={excerpt} size={['lg', 'xxl']} />}
+    {cover && <img class="cover" src={cover} loading="lazy" /> }
+  </article>
+</a>
+
+<style lang="scss">
+@use '@/styles/mixins/media';
+
+.card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 'date' 'title' 'excerpt' 'cover';
+}
+
+.card :global(.date) {
+  grid-area: date;
+}
+
+.card :global(.title) {
+  grid-area: title;
+  align-self: center;
+}
+
+.logo {
+  grid-area: title;
+  align-self: center;
+  max-width: 50%;
+  max-height: var(--s-qt);
+  transition: var(--transition-025);
+}
+
+
+.card :global(.excerpt) {
+  grid-area: excerpt;
+  margin-top: 1rem;
+}
+
+
+.cover {
+  grid-area: cover;
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  margin-top: 2rem;
+
+  @include media.media(lg) {
+    width: calc(100% + 10rem);
+    margin-inline: -5rem;
+  }
+}
+
+// If has logo hide title
+.card:has(.logo) :global(.title) {
+  color: var(--c-primary);
+  opacity: 0;
+}
+
+</style>

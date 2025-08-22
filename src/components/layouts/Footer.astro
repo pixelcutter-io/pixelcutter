@@ -1,0 +1,31 @@
+---
+import MarkdownText from "@/components/typography/MarkdownText.astro";
+import { useTranslations } from "@/i18n/i18n";
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as "en" | "it");
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <MarkdownText text={t('footer.text', {year: currentYear.toString()})} size={'sm'} />
+</footer>
+
+
+<style lang="scss">
+.footer {
+  min-height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-inline: var(--s-big);
+  padding-block: var(--s-df);
+  background-color: var(--c-primary);
+  margin-top: auto;
+}
+
+.footer :global(em) {
+  font-style: normal;
+  color: var(--c-accent);
+}
+</style>

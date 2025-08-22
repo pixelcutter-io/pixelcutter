@@ -1,0 +1,165 @@
+---
+import { marked } from "marked";
+import type {
+	ColorType,
+	HtmlTagType,
+	TypoSizeType,
+} from "../../types/components";
+
+interface Props {
+	text: string;
+	tag?: HtmlTagType;
+	size?: TypoSizeType | [TypoSizeType, TypoSizeType];
+	sizeIncrease?: number;
+	color?: ColorType;
+	class?: string;
+}
+
+const {
+	text,
+	tag = "article",
+	color,
+	size = "df",
+	sizeIncrease = 5,
+	class: className,
+} = Astro.props;
+const [sizeMin, sizeMax] = Array.isArray(size) ? size : [size, size];
+
+const Tag = tag;
+const html = marked.parse(text);
+
+const style = {
+	"--l-color": `var(--c-${color})`,
+	"--l-fs-min": `var(--fs-${sizeMin})`,
+	"--l-fs-max": `var(--fs-${sizeMax})`,
+	"--l-fs-increase": `${sizeIncrease}vw`,
+};
+---
+
+<Tag class:list={['text', className]} style={style} set:html={html} />
+
+<style lang="scss">
+  @use '@/styles/mixins/utils';
+
+  .text {
+    --lm: clamp(var(--l-fs-min), 1rem + var(--l-fs-increase), var(--l-fs-max));
+    font-size: var(--lm);
+
+    :global(*) {
+      font-family: var(--l-ff);
+      font-weight: var(--fw-regular);
+      font-size: var(--lfs-min);
+      line-height: calc(1em + 0.25rem);
+      text-align: var(--lalign);
+      color: var(--l-color);
+      transition: var(--transition-025);
+    }
+
+    // Margin
+    :global(*):is(h1, h2, h3, h4, h6):not(:first-child) {
+      margin-top: calc(var(--lm) * 2);
+    }
+
+    :global(*):is(h1, h2, h3, h4, h6, p, ul, ol, li):not(:last-child) {
+      margin-bottom: var(--lm);
+    }
+
+    // Tags
+    :global(h1),
+    :global(h2),
+    :global(h3),
+    :global(h4) {
+      font-weight: var(--fw-black);
+    }
+
+    :global(h1)  {
+      font-size: 3em;
+    }
+
+    :global(h2) {
+      font-size: 2em;
+    }
+
+    :global(p),
+    :global(li) {
+      line-height: 1.5;
+    }
+
+
+    :global(ul > li) {
+      padding-left: 1.5rem;
+    }
+
+    :global(ul > li::before) {
+      content: var(--unicode-bullet);
+      width: 1.5rem;
+      min-width: 1.5rem;
+      height: 1.5em;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: -1.5rem;
+      font-weight: var(--fw-bold);
+      font-size: 1.25em;
+      color: var(--c-accent);
+    }
+
+    :global(ol > li) {
+      counter-increment: my-awesome-counter;
+      padding-left: 1.5rem;
+    }
+
+    :global(ol > li::before) {
+      content: counter(my-awesome-counter);
+      width: 1.5rem;
+      min-width: 1.5rem;
+      height: 1.5em;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: -1.5rem;
+      font-weight: var(--fw-semi);
+      color: var(--c-accent);
+    }
+
+    // Inline tags
+    :global(a) {
+      font-weight: var(--fw-bold);
+      text-decoration: underline;
+      color: var(--c-accent);
+    }
+
+    :global(a):hover {
+      color: var(--c-primary);
+    }
+
+    :global(a):active {
+      scale: 0.96;
+    }
+
+    :global(a):focus-visible {
+      @include utils.focus-visible($radius: var(--s-uxxs));
+    }
+
+    :global(em) {
+      font-style: italic;
+    }
+
+    :global(strong) {
+      font-weight: var(--fw-bold);
+    }
+
+    :global(hr) {
+      margin-block: calc(var(--lm) * 2);
+      border: none;
+      border-top: 1px solid var(--c-grey-4);
+    }
+
+    :global(img) {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      margin-block: var(--lm);
+    }
+  }
+</style>

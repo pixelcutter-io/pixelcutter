@@ -1,0 +1,152 @@
+---
+import type {
+	ButtonSizeType,
+	ButtonThemeType,
+	ColorType,
+	IconPositionType,
+} from "../types/components";
+
+interface Props {
+	icon?: any;
+	label?: string;
+	theme?: ButtonThemeType;
+	size?: ButtonSizeType;
+	iconPosition?: IconPositionType;
+	bgColor?: ColorType;
+	labelColor?: ColorType;
+	hoverBgColor?: ColorType;
+	hoverLabelColor?: ColorType;
+	disabled?: boolean;
+	loading?: boolean;
+	href?: string;
+	onClick?: () => void;
+}
+
+const {
+	icon: Icon,
+	label,
+	theme = "fill",
+	size = "tr",
+	iconPosition = "after",
+	bgColor = "accent",
+	hoverBgColor = "secondary",
+	labelColor = "primary",
+	hoverLabelColor = "primary",
+	disabled,
+	loading,
+	href,
+	onClick,
+} = Astro.props;
+
+const Tag = href ? "a" : "button";
+
+const sharedProps = {
+	style: {
+		"--l-size": `var(--s-${size})`,
+		"--l-bg-color": `var(--c-${bgColor})`,
+		"--l-label-color": `var(--c-${labelColor})`,
+		"--l-hover-bg-color": `var(--c-${hoverBgColor})`,
+		"--l-hover-label-color": `var(--c-${hoverLabelColor})`,
+		"--l-icon-position": iconPosition === "after" ? "row" : "row-reverse",
+	},
+	disabled: disabled || loading,
+	"data-loading": loading || undefined,
+};
+
+const tagProps = {
+	...sharedProps,
+	...(href && { href, role: "button" }),
+	...(!href && { type: "button", onClick }),
+};
+---
+
+<Tag class:list={["btn", theme]} {...tagProps}>
+  {label && <span class="label">{label}</span>}
+  {Icon && <span class="icon"><Icon width="2rem" height="2rem" /></span>}
+</Tag>
+
+
+<style lang="scss">
+.btn {
+  appearance: none;
+  width: fit-content;
+  height: var(--l-size);
+  display: flex;
+  flex-direction: var(--l-icon-position);
+  gap: var(--s-uxs);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.btn > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: var(--transition-025);
+}
+
+.icon {
+  width: var(--l-size);
+  height: var(--l-size);
+  fill: var(--l-label-color);
+  border-radius: 3rem;
+}
+
+.label {
+  border-radius: var(--l-size);
+  color: var(--l-label-color);
+  font-weight: var(--fw-semi);
+}
+
+.btn:active > * {
+  scale: 0.96;
+}
+
+.btn:hover > * {
+  scale: 1.02;
+}
+
+.btn:not(.text):hover > * {
+  background-color: var(--l-hover-bg-color);
+}
+
+.btn:hover .icon {
+  fill: var(--l-hover-label-color);
+}
+
+.btn:hover .label {
+  color: var(--l-hover-label-color);
+}
+
+// If fill, outline or ghost theme
+.fill,
+.outline,
+.ghost {
+  .label {
+    padding-inline: calc(var(--l-size) / 1.5);
+  }
+}
+
+// If fill theme
+.fill  > * {
+  background-color: var(--l-bg-color);
+}
+
+// If ghost theme
+.ghost {
+  background-color: transparent;
+}
+
+// If text theme
+.text {
+
+}
+
+.text:hover {
+  .label {
+    text-decoration: underline;
+  }
+}
+
+</style>

@@ -1,0 +1,50 @@
+---
+import ContactsCta from "@/components/blocks/ContactsCta.astro";
+import HeroHome from "@/components/blocks/HeroHome.astro";
+import HowHome from "@/components/blocks/HowHome.astro";
+import WhatHome from "@/components/blocks/WhatHome.astro";
+import WhyHome from "@/components/blocks/WhyHome.astro";
+import Layout from "@/components/layouts/Layout.astro";
+import { getStaticPaths } from "@/i18n/i18n";
+
+export { getStaticPaths };
+const { lang } = Astro.params;
+---
+
+<Layout theme="home">
+  <HeroHome />
+  <section class="section section-invert">
+    <WhyHome />
+  </section>
+  <section class="section">
+    <WhatHome />
+  </section>
+  <section class="section section-invert">
+    <HowHome/>
+  </section>
+  <section class="section">
+    <ContactsCta />
+  </section>
+</Layout>
+
+<style lang="scss">
+@use '@/styles/mixins/media';
+
+.section {
+  padding-block: 6rem;
+  padding-inline: var(--s-xxl);
+
+  @include media.media(lg) {
+    padding-inline: var(--s-big);
+  }
+}
+
+.section > :global(*) {
+  max-width: var(--w-max-df);
+  margin-inline: auto;
+}
+
+.section-invert  {
+  background-color: var(--c-secondary);
+}
+</style>

@@ -1,0 +1,44 @@
+---
+import Arrow from "@/assets/icons/arrow-up-right.svg";
+import { useTranslations } from "@/i18n/i18n";
+import Button from "../Button.astro";
+import Typo from "../typography/Typo.astro";
+import type { AlignType, ColorType } from "../../types/components";
+
+interface Props {
+  color?: ColorType;
+	align?: AlignType;
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as "en" | "it");
+const {color="secondary" ,align = "left"} = Astro.props;
+---
+
+<div class:list={["contacts", align]}>
+  <Typo class="title" text={t('home.cta.title')}  tag="h2" weight="black" color={color} size={['tr', 'sp']} balancer />
+  <Button label={t('action.contact')} icon={Arrow} href={`/${lang}/contacts`} size="tr" />
+</div>
+
+<style lang="scss">
+@use '@/styles/mixins/utils';
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-db);
+}
+
+.contacts :global(.title) {
+  @include utils.last-character('!');
+}
+
+// If center
+.center {
+  align-items: center;
+}
+
+.center :global(.title) {
+  text-align: center;
+}
+</style>

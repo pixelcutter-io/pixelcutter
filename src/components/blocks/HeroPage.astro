@@ -1,0 +1,32 @@
+---
+import Typo from '../typography/Typo.astro';
+
+interface Props {
+  title: string;
+	onClick?: () => void;
+}
+
+const { title } = Astro.props;
+
+---
+
+<div class="hero">
+  <Typo class="title" text={title} tag="h1" weight="black" size={['tr', 'sp']} color="secondary" balancer/>
+</div>
+
+<style lang="scss">
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 25vh;
+  max-width: var(--w-max-df);
+  margin-inline: auto;
+}
+
+.hero :global(.title) {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+</style>

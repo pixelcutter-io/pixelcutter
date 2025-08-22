@@ -1,0 +1,59 @@
+---
+import Layout from "@/components/layouts/Layout.astro";
+import Typo from "@/components/typography/Typo.astro";
+
+import { useTranslations, getStaticPaths } from "@/i18n/i18n";
+
+
+export { getStaticPaths };
+const { lang } = Astro.params;
+const t = useTranslations(lang as 'en' | 'it');
+---
+
+<Layout theme="contacts">
+  <section class="section">
+    <Typo text={t('contacts.text')} color="secondary" size={["sm", "db"]} align="center" balancer />
+    <a class="email" href="mailto:info@pixelcutter.io">
+      <span>info</span>
+      <span>@</span>
+      <span>pixelcutter.io</span>
+    </a>
+  </section>
+</Layout>
+
+
+<style lang="scss">
+.section {
+  flex:1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--s-xxl);
+  max-width: var(--w-max-sm);
+  margin-inline: auto;
+}
+
+.email {
+  display: flex;
+  font-weight: var(--fw-bold);
+  font-size: clamp(var(--s-db), 1rem + 7vw,  var(--s-dc));
+  line-height: 1;
+  text-align: cebter;
+  color: var(--c-secondary);
+  transition: var(--transition-025);
+}
+
+.email span:nth-child(1),
+.email span:nth-child(3){
+  text-decoration: underline;
+}
+
+.email span:nth-child(2) {
+  color: var(--c-accent);
+}
+
+.email:hover {
+  color: var(--c-accent);
+}
+</style>

@@ -1,0 +1,137 @@
+---
+import HeroPage from "@/components/blocks/HeroPage.astro";
+import Layout from "@/components/layouts/Layout.astro";
+import MarkdownText from "@/components/typography/MarkdownText.astro";
+import Typo from "@/components/typography/Typo.astro";
+import Tag from "../../../components/Tag.astro";
+
+// Parametri della route
+const { lang, project } = Astro.params;
+
+// Carica tutti i file Markdown dei progetti
+const allProjects = import.meta.glob("../../../content/*/projects/*.md");
+
+// Carica tutti i progetti della lingua in parallelo
+const projectList = await Promise.all(
+	Object.entries(allProjects)
+		.filter(([path]) => path.includes(`/${lang}/projects/`))
+		.map(([_, resolver]) => resolver()),
+);
+
+// Trova il progetto corrispondente allo slug
+const projectContent = projectList.find(
+	(mod) =>
+		(mod.frontmatter.slug || mod.frontmatter.title.toLowerCase()) === project,
+);
+
+// Se non esiste, genera errore 404
+if (!projectContent) {
+	throw new Error(`Project "${project}" not found for language "${lang}"`);
+}
+
+// Genera tutte le rotte dinamiche in fase di build
+export async function getStaticPaths() {
+	const allProjects = import.meta.glob("../../../content/*/projects/*.md");
+
+	const paths = Object.entries(allProjects)
+		.map(([path]) => {
+			const langFromPath = path.includes("/en/") ? "en" : "it";
+			const slug = path.split("/").pop()?.replace(".md", "");
+			return slug ? { params: { lang: langFromPath, project: slug } } : null;
+		})
+		.filter(Boolean);
+
+	return paths;
+}
+---
+
+<Layout>
+  <div class="hero">
+    {projectContent.frontmatter.title && <Typo class="title" text={projectContent.frontmatter.title} tag="h1" weight="black" color="secondary" size={['tr', 'sp']}} balancer/> }
+    {projectContent.frontmatter.logo && <img class="logo" src={projectContent.frontmatter.logo}  />}
+  </div>
+
+  <section class="content">
+    <MarkdownText text={projectContent.rawContent()} size={['lg', 'xxl']}/>
+  </section>
+  
+  <section class="section">
+    <div class="tags">
+      <Typo text="under the hood"/>
+      <div class="list-tags">
+        {projectContent.frontmatter.tags.map((tag) => (
+          <Tag tag={tag} />
+        ))}
+      </div>
+    </div>
+  </section>
+  
+</Layout>
+
+<style lang="scss">
+@use '@/styles/mixins/media';
+
+.hero {
+  width: 100%;
+  max-width: var(--w-max-sm);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 'title';
+}
+
+.hero :global(.title) {
+  grid-area: title;
+  align-self: center;
+  text-transform: uppercase;
+}
+
+.logo {
+  grid-area: title;
+  align-self: center;
+  max-width: 50%;
+  max-height: var(--s-sp);
+  transition: var(--transition-025);
+}
+
+// If has logo hide title
+.hero:has(.logo) :global(.title) {
+  color: var(--c-primary);
+  opacity: 0;
+}
+
+.content,
+.section {
+  padding-block: 6rem;
+  padding-inline: var(--s-xxl);
+
+  @include media.media(lg) {
+    padding-inline: var(--s-big);
+  }
+}
+
+.content > :global(*) {
+  max-width: var(--w-max-sm);
+  margin-inline: auto;
+}
+
+.content :global(img) {
+  @include media.media(lg) {
+    width: calc(100% + 10rem);
+    margin-inline: -5rem;
+  }
+}
+
+.section > :global(*) {
+  max-width: var(--w-max-sm);
+  margin-inline: auto;
+}
+
+
+.list-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-df);
+}
+
+</style>

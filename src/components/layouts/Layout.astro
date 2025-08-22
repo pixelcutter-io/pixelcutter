@@ -1,0 +1,52 @@
+---
+import "@/styles/main.scss";
+import { getLangFromUrl } from "../../i18n/i18n";
+import Footer from "./Footer.astro";
+import Header from "./Header.astro";
+
+interface Props {
+	theme?: "default" | "home" | "project" | "contacts";
+	onClick?: () => void;
+}
+
+const { theme = "default" } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro Basics</title>
+	</head>
+	<body>
+	<Header />
+	<main class:list={["main", theme]}>
+	  <slot />
+		<Footer />
+	</main>
+	</body>
+</html>
+
+<style lang="scss">
+@use '@/styles/mixins/media';
+.main {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-top: 7.5rem;
+}
+
+
+.contacts {
+  padding-top: 0;
+}
+
+
+
+</style>

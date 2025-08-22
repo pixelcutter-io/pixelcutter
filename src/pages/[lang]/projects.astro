@@ -1,0 +1,105 @@
+---
+import ContactsCta from "@/components/blocks/ContactsCta.astro";
+import Layout from "@/components/layouts/Layout.astro";
+import HeroPage from "@/components/blocks/HeroPage.astro";
+import { useTranslations, getStaticPaths } from "@/i18n/i18n";
+import ProjectCard from "@/components/blocks/ProjectCard.astro";
+import MarkdownText from "@/components/typography/MarkdownText.astro";
+
+export { getStaticPaths };
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as "en" | "it");
+
+// Importa tutti i progetti (tutte le lingue)
+const allProjects = import.meta.glob('../../content/*/projects/*.md');
+
+// Filtra solo i progetti della lingua corrente
+const projectEntries = Object.entries(allProjects)
+  .filter(([path]) => path.includes(`/${lang}/projects/`));
+
+// Carica tutti i progetti in parallelo
+const projects = await Promise.all(
+  projectEntries.map(async ([path, resolver]) => {
+    const module = await resolver();
+    const slug = path.split('/').pop()?.replace('.md', '') || '';
+    return {
+      ...module.frontmatter,
+      slug: module.frontmatter?.slug || slug,
+      url: `/${lang}/projects/${module.frontmatter?.slug || slug}`,
+    };
+  })
+);
+
+// Ordina solo per data (dal più recente al più vecchio)
+projects.sort((a, b) => new Date(b.date || 0).getTime() - new Date(a.date || 0).getTime());
+---
+
+<Layout theme="default">
+  <HeroPage title={t('projects.title')} />
+  <section class="content">
+    <MarkdownText text={t('projects.text')} size={['lg', 'xxl']}/>
+  </section>
+  <section class="list">
+    {projects.map((project, index) => (
+      <ProjectCard
+        url={project.url}
+        logo={project.logo}
+        title={project.title}
+        excerpt={project.excerpt}
+        cover={project.cover}
+        date={new Date(project.date).getFullYear().toString()}
+      />
+    ))}
+  </section>
+  <section class="section section-invert">
+    <ContactsCta color="primary" align="center" />
+  </section>
+</Layout>
+
+<style lang="scss">
+@use '@/styles/mixins/media';
+
+.content,
+.section {
+  padding-block: 6rem;
+  padding-inline: var(--s-xxl);
+
+  @include media.media(lg) {
+    padding-inline: var(--s-big);
+  }
+}
+
+.content > :global(*) {
+  max-width: var(--w-max-sm);
+  margin-inline: auto;
+}
+
+.content :global(img) {
+  @include media.media(lg) {
+    width: calc(100% + 10rem);
+    margin-inline: -5rem;
+  }
+}
+
+.list {
+  padding-block: 6rem;
+  width: 100%;
+  max-width: var(--w-max-sm);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6rem;
+}
+
+.section > :global(*) {
+  max-width: var(--w-max-df);
+  margin-inline: auto;
+}
+
+.section-invert  {
+  background-color: var(--c-secondary);
+}
+
+</style>

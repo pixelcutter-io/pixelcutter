@@ -1,0 +1,38 @@
+---
+import React from "@/assets/tags/react.svg";
+import Sass from "@/assets/tags/sass.svg";
+import { useTranslations } from "@/i18n/i18n";
+import Typo from "./typography/Typo.astro";
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as "en" | "it");
+
+interface Props {
+	tag: string;
+}
+
+const { tag } = Astro.props;
+
+const iconMap = {
+	react: React,
+	sass: Sass,
+};
+
+const Icon = iconMap[tag as keyof typeof iconMap] || null;
+---
+
+<div class="tag">
+  <Icon width="3rem" height="3rem" fill="var(--c-accent)" />
+  <Typo text={t(`label.${tag}`)} color="secondary" />
+</div>
+
+<style lang="scss">
+  .tag {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-xxs);
+  }
+
+</style>

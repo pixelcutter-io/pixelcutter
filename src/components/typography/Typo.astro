@@ -1,0 +1,74 @@
+---
+import type {
+	ColorType,
+	TypoAlignType,
+	TypoLineHeightType,
+	TypoSizeType,
+	TypoTagType,
+	TypoWeightType,
+} from "../../types/components";
+
+export interface Props {
+	text: string | number;
+	tag?: TypoTagType;
+	family?: string;
+	size?: TypoSizeType | [TypoSizeType, TypoSizeType];
+	sizeIncrease?: number;
+	weight?: TypoWeightType;
+	lineHeight?: TypoLineHeightType;
+	align?: TypoAlignType;
+	color?: ColorType;
+	balancer?: boolean;
+	class?: string;
+}
+
+const {
+	text,
+	tag = "span",
+	family = "main",
+	size = "df",
+	sizeIncrease = 5,
+	weight = "regular",
+	lineHeight = "default",
+	align = "left",
+	color = "secondary",
+	balancer = false,
+	class: className,
+} = Astro.props;
+
+const [sizeMin, sizeMax] = Array.isArray(size) ? size : [size, size];
+const Tag = tag;
+
+const style = {
+	"--l-color": `var(--c-${color})`,
+	"--l-fs-min": `var(--fs-${sizeMin})`,
+	"--l-fs-max": `var(--fs-${sizeMax})`,
+	"--l-fs-increase": `${sizeIncrease}vw`,
+	"--l-fw": `var(--fw-${weight})`,
+	"--l-lh": lineHeight === "default" ? "0.25rem" : "0.5em",
+	"--l-align": align,
+};
+---
+
+<Tag
+  class:list={['typo', className,{ balancer}]}
+  style={style}
+>
+  {text}
+</Tag>
+
+<style lang="scss">
+  .typo {
+    font-weight: var(--l-fw);
+    font-size: clamp(var(--l-fs-min), 1rem + var(--l-fs-increase), var(--l-fs-max));
+    line-height: calc(1em + var(--l-lh));
+    text-align: var(--l-align);
+    color: var(--l-color);
+    transition: var(--transition-025);
+  }
+
+  .balancer {
+    text-wrap: balance;
+  }
+
+</style>

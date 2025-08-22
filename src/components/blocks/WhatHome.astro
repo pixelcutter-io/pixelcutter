@@ -1,0 +1,78 @@
+---
+import Design from "@/assets/illustrations/design.svg";
+import MarkdownText from "@/components/typography/MarkdownText.astro";
+import Typo from "@/components/typography/Typo.astro";
+import { useTranslations } from "@/i18n/i18n";
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as "en" | "it");
+---
+<div class="what">
+  <article>
+    <Typo class="title" text={t('home.what.title')} tag="h2" weight="black" color="secondary" size={['tr', 'qt']} balancer />
+    <MarkdownText text={t('home.what.text')} color="secondary" size={['lg', 'xxl']}  />
+  </article>
+  <div>
+    <article>
+      <Typo class="title" text={t('home.what_design.title')} tag="h3" weight="black" color="secondary" size={['xxl', 'tr']} balancer />
+      <MarkdownText text={t('home.what_design.text')} color="secondary" size={['df', 'lg']}  />
+    </article>
+    <Design class="illustration" />
+  </div>
+  <div class="divider" />
+  <div>
+    <Design class="illustration" />
+    <article>
+      <Typo class="title" text={t('home.what_develop.title')} tag="h3" weight="black" color="secondary" size={['xxl', 'tr']} balancer />
+      <MarkdownText text={t('home.what_develop.text')} color="secondary" size={['df', 'lg']}  />
+    </article>
+  </div>
+</div>
+
+<style lang="scss">
+@use '@/styles/mixins/utils';
+
+.what {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 5vw;
+}
+
+.what article,
+.what > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.what article {
+  gap: var(--s-xxl);
+}
+
+.what > article {
+  grid-column: 1/4;
+  justify-self: center;
+  text-align: center;
+  gap: var(--s-xxl);
+}
+
+.what > div {
+  gap: var(--s-tr);
+}
+
+.what .illustration {
+  width: 60%;
+  height: 60%;
+  align-self: center;
+}
+
+.divider {
+  width: 2px;
+  height: 100%;
+  background-color: var(--c-accent);
+}
+
+.what :global(.title) {
+  @include utils.last-character();
+}
+
+</style>

@@ -1,0 +1,129 @@
+---
+import Button from "@/components/Button.astro";
+import Globe from "@/assets/icons/globe.svg";
+import { LANGUAGES, DEFAULT_LANG, getLocalizedUrl } from "@/i18n/i18n";
+
+interface Props {
+  currentLang: 'en' | 'it';
+  className?: string;
+}
+
+const { currentLang, className } = Astro.props;
+
+const languages = {
+  en: 'English',
+  it: 'Italiano'
+};
+
+const otherLanguages = LANGUAGES.filter(lang => lang !== currentLang);
+---
+
+<div class:list={["language-dropdown", className]}>
+  <Button
+    icon={Globe}
+    theme="ghost"
+    size="big"
+    labelColor="secondary"
+    hoverBgColor="secondary"
+  />
+
+  <div class="dropdown-menu">
+    {LANGUAGES.map(lang => (
+      <a
+        href={getLocalizedUrl(lang as keyof typeof languages, "/")}
+        class="dropdown-item"
+        data-lang={lang}
+      >
+        {languages[lang as keyof typeof languages]}
+      </a>
+    ))}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const dropdowns = document.querySelectorAll('.language-dropdown');
+
+    dropdowns.forEach(dropdown => {
+      const button = dropdown.querySelector('.btn');
+      const menu = dropdown.querySelector('.dropdown-menu');
+
+      if (!button || !menu) return;
+
+      // Toggle dropdown
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        dropdown.classList.toggle('open');
+
+        // Chiudi altri dropdown
+        dropdowns.forEach(other => {
+          if (other !== dropdown) {
+            other.classList.remove('open');
+          }
+        });
+      });
+
+      // Chiudi quando clicchi fuori
+      document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target as Node)) {
+          dropdown.classList.remove('open');
+        }
+      });
+
+      // Chiudi con ESC
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          dropdown.classList.remove('open');
+        }
+      });
+    });
+  });
+</script>
+
+<style lang="scss">
+.language-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  width: 10rem;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--c-secondary);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all var(--transition-025);
+  z-index: 1000;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.language-dropdown.open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 1rem 1.5rem;
+  color: var(--c-primary);
+  text-decoration: none;
+  transition: background-color var(--transition-025);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--c-accent);
+  }
+
+  &:active {
+    background-color: var(--c-accent);
+    transform: scale(0.98);
+  }
+}
+</style>
