@@ -5,6 +5,7 @@ import Layout from "@/components/layouts/Layout.astro";
 import MarkdownText from "@/components/typography/MarkdownText.astro";
 
 import { getStaticPaths } from "@/i18n/i18n";
+import Section from "../../components/layouts/Section.astro";
 
 export { getStaticPaths };
 const { lang } = Astro.params;
@@ -14,45 +15,11 @@ const about = await import(`../../content/${lang}/about.md`);
 
 <Layout theme="default">
   <HeroPage title={about.frontmatter.title} />
-  <section class="content">
+  <Section maxWidth="sm">
     <MarkdownText text={about.rawContent()} size={['lg', 'xxl']} />
-  </section>
-  <section class="section section-invert">
+  </Section>
+  <Section maxWidth="df" bgColor="secondary">
     <ContactsCta color="primary" align="center" />
-  </section>
+  </Section>
 </Layout>
 
-<style lang="scss">
-@use '@/styles/mixins/media';
-
-.content,
-.section {
-  padding-block: 6rem;
-  padding-inline: var(--s-xxl);
-
-  @include media.media(lg) {
-    padding-inline: var(--s-big);
-  }
-}
-
-.content > :global(*) {
-  max-width: var(--w-max-sm);
-  margin-inline: auto;
-}
-
-.content :global(img) {
-  @include media.media(lg) {
-    width: calc(100% + 10rem);
-    margin-inline: -5rem;
-  }
-}
-
-.section > :global(*) {
-  max-width: var(--w-max-df);
-  margin-inline: auto;
-}
-
-.section-invert  {
-  background-color: var(--c-secondary);
-}
-</style>

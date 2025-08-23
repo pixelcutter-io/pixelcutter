@@ -1,8 +1,10 @@
 ---
-import HeroPage from "@/components/blocks/HeroPage.astro";
 import Layout from "@/components/layouts/Layout.astro";
 import MarkdownText from "@/components/typography/MarkdownText.astro";
 import Typo from "@/components/typography/Typo.astro";
+import ContactsCta from "../../../components/blocks/ContactsCta.astro";
+import ProjectInfo from "../../../components/blocks/ProjectInfo.astro";
+import Section from "../../../components/layouts/Section.astro";
 import Tag from "../../../components/Tag.astro";
 
 // Parametri della route
@@ -51,19 +53,34 @@ export async function getStaticPaths() {
     {projectContent.frontmatter.logo && <img class="logo" src={projectContent.frontmatter.logo}  />}
   </div>
 
-  <section class="content">
+  <Section maxWidth="sm" padding={["st", "uxxs"]}>
     <MarkdownText text={projectContent.rawContent()} size={['lg', 'xxl']}/>
-  </section>
+  </Section>
   
-  <section class="section">
-    <div class="tags">
-      <Typo text="under the hood"/>
-      <div class="list-tags">
-        {projectContent.frontmatter.tags.map((tag) => (
-          <Tag tag={tag} />
-        ))}
-      </div>
-    </div>
+  
+  <Section maxWidth="sm" padding={["uxxs", "st"]}>
+    <ProjectInfo info={[
+      {
+        label:"TBT Year",
+        date: projectContent.frontmatter.date
+      },
+      {
+        label: "TBT Under the hood",
+        tags: projectContent.frontmatter.tags
+      },
+      {
+        label: "TBT Look in action",
+        url: projectContent.frontmatter.website
+      },
+      {
+        label: "TBT View the code",
+        url: projectContent.frontmatter.git
+      }
+    ]} />
+  </Section>
+  
+  <Section maxWidth="df" bgColor="secondary">
+    <ContactsCta color="primary" align="center" />
   </section>
   
 </Layout>
@@ -100,38 +117,7 @@ export async function getStaticPaths() {
   opacity: 0;
 }
 
-.content,
-.section {
-  padding-block: 6rem;
-  padding-inline: var(--s-xxl);
-
-  @include media.media(lg) {
-    padding-inline: var(--s-big);
-  }
-}
-
-.content > :global(*) {
-  max-width: var(--w-max-sm);
-  margin-inline: auto;
-}
-
-.content :global(img) {
-  @include media.media(lg) {
-    width: calc(100% + 10rem);
-    margin-inline: -5rem;
-  }
-}
-
-.section > :global(*) {
-  max-width: var(--w-max-sm);
-  margin-inline: auto;
-}
 
 
-.list-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-df);
-}
 
 </style>

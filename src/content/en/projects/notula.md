@@ -6,9 +6,8 @@ excerpt: "Vestibulum id ligula porta felis euismod semper. Donec ullamcorper nul
 cover: "https://placehold.co/600x400"
 tags: ["react", "sass"]
 date: 2025-01-01
-website: ""
-github: ""
-gitlab: ""
+website: "www.notula.net"
+git: "github.com/mauriziomambrini/doublem_vue.git"
 ---
 
 Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam quis risus eget urna mollis ornare vel eu leo. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Sed posuere consectetur est at lobortis.

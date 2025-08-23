@@ -1,18 +1,18 @@
 ---
 import Arrow from "@/assets/icons/arrow-up-right.svg";
 import { useTranslations } from "@/i18n/i18n";
+import type { AlignType, ColorType } from "../../types/components";
 import Button from "../Button.astro";
 import Typo from "../typography/Typo.astro";
-import type { AlignType, ColorType } from "../../types/components";
 
 interface Props {
-  color?: ColorType;
+	color?: ColorType;
 	align?: AlignType;
 }
 
 const { lang } = Astro.params;
 const t = useTranslations(lang as "en" | "it");
-const {color="secondary" ,align = "left"} = Astro.props;
+const { color = "secondary", align = "left" } = Astro.props;
 ---
 
 <div class:list={["contacts", align]}>

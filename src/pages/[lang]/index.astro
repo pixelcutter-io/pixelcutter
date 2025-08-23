@@ -5,46 +5,24 @@ import HowHome from "@/components/blocks/HowHome.astro";
 import WhatHome from "@/components/blocks/WhatHome.astro";
 import WhyHome from "@/components/blocks/WhyHome.astro";
 import Layout from "@/components/layouts/Layout.astro";
+import Section from "@/components/layouts/Section.astro";
 import { getStaticPaths } from "@/i18n/i18n";
 
 export { getStaticPaths };
-const { lang } = Astro.params;
 ---
 
 <Layout theme="home">
   <HeroHome />
-  <section class="section section-invert">
+  <Section bgColor="secondary">
     <WhyHome />
-  </section>
-  <section class="section">
+  </Section>
+  <Section>
     <WhatHome />
-  </section>
-  <section class="section section-invert">
+  </Section>
+  <Section bgColor="secondary">
     <HowHome/>
-  </section>
-  <section class="section">
+  </Section>
+  <Section>
     <ContactsCta />
-  </section>
+  </Section>
 </Layout>
-
-<style lang="scss">
-@use '@/styles/mixins/media';
-
-.section {
-  padding-block: 6rem;
-  padding-inline: var(--s-xxl);
-
-  @include media.media(lg) {
-    padding-inline: var(--s-big);
-  }
-}
-
-.section > :global(*) {
-  max-width: var(--w-max-df);
-  margin-inline: auto;
-}
-
-.section-invert  {
-  background-color: var(--c-secondary);
-}
-</style>

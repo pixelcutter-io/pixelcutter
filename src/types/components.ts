@@ -21,10 +21,7 @@ export type SizeType =
 	| "uxs"
 	| "uxxs";
 
-export type ColorType =
-	| "primary"
-	| "secondary"
-	| "accent";
+export type ColorType = "primary" | "secondary" | "accent";
 
 export type IconPositionType = "before" | "after";
 
@@ -41,7 +38,7 @@ export type HtmlTagType =
 	| "nav"
 	| "ul";
 
-
+export type MaxWidth = Extract<SizeType, "df" | "sm" | "xs" | "xxs">;
 
 // Button
 export type ButtonThemeType = "fill" | "outline" | "ghost" | "text";
@@ -49,31 +46,6 @@ export type ButtonSizeType = Extract<
 	SizeType,
 	"tr" | "big" | "db" | "xxl" | "df"
 >;
-
-
-// Divider
-export type DividerThemeType = "line" | "vertical" | "space";
-
-// Flex
-export type FlexDirectionType =
-	| "row"
-	| "row-reverse"
-	| "column"
-	| "column-reverse";
-export type FlexJustifyType =
-	| "flex-start"
-	| "center"
-	| "flex-end"
-	| "space-between"
-	| "space-around";
-export type FlexAlignType =
-	| "flex-start"
-	| "center"
-	| "flex-end"
-	| "stretch"
-	| "baseline";
-export type FlexWrapType = "nowrap" | "wrap" | "wrap-reverse";
-
 
 // Typo
 export type TypoTagType = "h1" | "h2" | "h3" | "h4" | "p" | "label" | "span";

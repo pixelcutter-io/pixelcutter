@@ -19,11 +19,13 @@ const iconMap = {
 };
 
 const Icon = iconMap[tag as keyof typeof iconMap] || null;
+
+if (!Icon) return;
 ---
 
 <div class="tag">
-  <Icon width="3rem" height="3rem" fill="var(--c-accent)" />
-  <Typo text={t(`label.${tag}`)} color="secondary" />
+  <Icon width="5rem" height="5rem" fill="var(--c-accent)" />
+  <Typo text={t(`label.${tag}`)} color="accent" size={['md', 'lg']} />
 </div>
 
 <style lang="scss">

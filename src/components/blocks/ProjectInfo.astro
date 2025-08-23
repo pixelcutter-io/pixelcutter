@@ -1,0 +1,58 @@
+---
+import Tag from "../Tag.astro";
+import Typo from "../typography/Typo.astro";
+
+type Info = {
+	label: string;
+	tags?: string[];
+	url?: string;
+	date?: string;
+};
+
+interface Props {
+	info: Info[];
+}
+
+const { info } = Astro.props;
+
+if (!info.length) return;
+---
+<div class="list">
+  {info.map((item) => (
+    <div class="info">
+      <Typo text={item.label} size={['lg', 'xxl']}/>
+      {item.date &&   <Typo class="date" text={new Date(item.date).getFullYear().toString()} weight="semi" color="accent" size={['lg', 'qr']}/>}
+      {item.url && <a href={`https://${item.url}`} target="_blank">
+        <Typo class="date" text={item.url} weight="semi" color="accent" size={['lg', 'qr']}/>
+      </a>}
+      {item.tags &&
+        <div class="tags">
+          {item.tags.map((tag) => (
+            <Tag tag={tag} />
+          ))}
+        </div>
+      }
+    </div>
+  ))}
+</div>
+
+
+<style lang="scss">
+  @use '@/styles/mixins/media';
+  
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-df);
+    box-shadow: inset 0 -1px 0 0 var(--c-secondary);
+    padding-block: var(--s-db);
+  }
+  
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-df);
+  }
+
+
+</style>

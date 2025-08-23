@@ -1,0 +1,58 @@
+---
+import type { ColorType, MaxWidth, SizeType } from "../../types/components";
+
+interface Props {
+	maxWidth?: MaxWidth;
+	padding?: SizeType | [SizeType, SizeType];
+	bgColor?: ColorType;
+	class?: string;
+}
+
+const {
+	maxWidth = "df",
+	padding = "st",
+	bgColor,
+	class: className,
+} = Astro.props;
+
+const [pTop, pBottom] = Array.isArray(padding) ? padding : [padding, padding];
+
+const style = {
+	"--l-w-max": `var(--w-max-${maxWidth})`,
+	"--l-p-top": `var(--s-${pTop})`,
+	"--l-p-bottom": `var(--s-${pBottom})`,
+	"--l-bg": bgColor ? `var(--c-${bgColor})` : "transparent",
+};
+---
+
+<section class:list={["section", className]} style={style}>
+  <slot/>
+</section>
+
+<style lang="scss">
+  @use '@/styles/mixins/media';
+  
+  .section {
+    width: 100%;
+    padding-top: var(--l-p-top);
+    padding-bottom: var(--l-p-bottom);
+    padding-inline: var(--s-xxl);
+    background-color: var(--l-bg);
+    
+    @include media.media(lg) {
+      padding-inline: var(--s-big);
+    }
+  }
+  
+  .section > :global(*) {
+    max-width: var(--l-w-max);
+    margin-inline: auto;
+  }
+  
+  .section :global(img):not(.logo) {
+    @include media.media(lg) {
+      width: calc(100% + 10rem);
+      margin-inline: -5rem;
+    }
+  }
+</style>
