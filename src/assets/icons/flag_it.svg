@@ -1,0 +1,6 @@
+
+<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="#009246" fill-rule="evenodd" d="M0 3c0-.56.44-1.01.99-1.01h4v12H.98c-.56 0-1-.46-1-1.01v-10Z"/>
+    <polygon fill="#EEE" points="11 2 5 2 5 14 11 14"/>
+    <path fill="#ED2939" fill-rule="evenodd" d="M11 2h4c.55 0 .99.45.99 1v9.99c0 .55-.45 1-1 1h-4.01v-12Z"/>
+</svg>

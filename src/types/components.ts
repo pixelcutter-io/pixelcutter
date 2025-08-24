@@ -41,7 +41,7 @@ export type HtmlTagType =
 export type MaxWidth = Extract<SizeType, "df" | "sm" | "xs" | "xxs">;
 
 // Button
-export type ButtonThemeType = "fill" | "outline" | "ghost" | "text";
+export type ButtonThemeType = "fill" | "ghost" | "text";
 export type ButtonSizeType = Extract<
 	SizeType,
 	"tr" | "big" | "db" | "xxl" | "df"

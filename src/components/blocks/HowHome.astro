@@ -30,13 +30,18 @@ const steps = ["idea", "research", "design", "development", "result"];
 </div>
 
 <style lang="scss">
+@use '@/styles/mixins/media';
 @use '@/styles/mixins/utils';
 
 .how {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr;
   background-color: var(--c-secondary);
   gap: 5vw;
+  
+  @include media.media(sm) {
+    grid-template-columns: 1fr 2fr;
+  }
 }
 
 .how > article{

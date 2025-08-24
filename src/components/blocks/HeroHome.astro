@@ -22,8 +22,12 @@ const t = useTranslations(lang as "en" | "it");
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(3, 1fr);
   gap: var(--s-xxl);
-  padding-bottom: 7.5rem;
+  padding-bottom: var(--s-qt);
   padding-inline: var(--s-xxl);
+  
+  @include media.media(sm) {
+    padding-bottom: 7.5rem;
+  }
 
   @include media.media(lg) {
     padding-inline: var(--s-big);

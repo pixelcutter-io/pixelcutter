@@ -4,14 +4,14 @@ import Sass from "@/assets/tags/sass.svg";
 import { useTranslations } from "@/i18n/i18n";
 import Typo from "./typography/Typo.astro";
 
-const { lang } = Astro.params;
-const t = useTranslations(lang as "en" | "it");
-
 interface Props {
 	tag: string;
 }
 
 const { tag } = Astro.props;
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as "en" | "it");
 
 const iconMap = {
 	react: React,

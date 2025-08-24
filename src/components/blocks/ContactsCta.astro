@@ -16,12 +16,27 @@ const { color = "secondary", align = "left" } = Astro.props;
 ---
 
 <div class:list={["contacts", align]}>
-  <Typo class="title" text={t('home.cta.title')}  tag="h2" weight="black" color={color} size={['tr', 'sp']} balancer />
-  <Button label={t('action.contact')} icon={Arrow} href={`/${lang}/contacts`} size="tr" />
+  <Typo
+    class="title"
+    text={t("home.cta.title")}
+    tag="h2"
+    weight="black"
+    color={color}
+    size={["tr", "sp"]}
+    balancer
+  />
+  <Button
+    label={t("action.contact")}
+    icon={Arrow}
+    href={`/${lang}/contacts`}
+    size="tr"
+    hoverBgColor={color === "secondary" ? "secondary" : "primary" }
+    hoverLabelColor={color === "secondary" ? "primary": "secondary"}
+    hoverAnimation />
 </div>
 
 <style lang="scss">
-@use '@/styles/mixins/utils';
+@use "@/styles/mixins/utils";
 
 .contacts {
   display: flex;

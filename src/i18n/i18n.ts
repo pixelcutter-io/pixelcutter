@@ -32,10 +32,12 @@ export function getLocalizedUrl(
 	lang: keyof typeof ui,
 	pathname: string = "/",
 ): string {
-	if (lang === DEFAULT_LANG) {
-		return pathname;
-	}
-	return `/${lang}${pathname === "/" ? "" : pathname}`;
+	const cleanPathname = pathname.replace(
+		new RegExp(`^/(${LANGUAGES.join("|")})`),
+		"",
+	);
+
+	return `/${lang}${cleanPathname}`;
 }
 
 export function getStaticPaths() {

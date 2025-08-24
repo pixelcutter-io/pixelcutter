@@ -16,12 +16,17 @@ const t = useTranslations(lang as "en" | "it");
 </div>
 
 <style lang="scss">
+@use '@/styles/mixins/media';
 @use '@/styles/mixins/utils';
 
 .why {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr;
   gap: 5vw;
+  
+  @include media.media(sm) {
+    grid-template-columns: 2fr 1fr;
+  }
 }
 
 .why article {
