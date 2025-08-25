@@ -76,18 +76,20 @@ const flags = {
 </script>
 
 <style lang="scss">
+  @use '@/styles/mixins/media';
   .switch-lang {
-    position: relative;
+    @include media.media(sm) {
+      position: relative;
+    }
   }
   
   .dropdown-lang {
     visibility: hidden;
-    width: 10rem;
     position: absolute;
-    top: 100%;
-    right: 0;
+    top: 4rem;
+    right: var(--s-xxl);
+    left: var(--s-xxl);
     z-index: var(--z-index-top);
-    margin-top: var(--s-xxs);
     padding: var(--s-xxs);
     background: var(--c-primary);
     border-radius: var(--s-xxs);
@@ -97,6 +99,13 @@ const flags = {
     transition: var(--transition-025);
     overflow: hidden;
     opacity: 0;
+    
+    @include media.media(sm) {
+      width: 10rem;
+      top: 3rem;
+      right: 0;
+      left: initial;
+    }
   }
   
   .switch-lang.open .dropdown-lang {

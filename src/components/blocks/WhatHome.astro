@@ -1,5 +1,6 @@
 ---
 import Design from "@/assets/illustrations/design.svg";
+import Development from "@/assets/illustrations/development.svg";
 import MarkdownText from "@/components/typography/MarkdownText.astro";
 import Typo from "@/components/typography/Typo.astro";
 import { useTranslations } from "@/i18n/i18n";
@@ -21,7 +22,7 @@ const t = useTranslations(lang as "en" | "it");
   </div>
   <div class="divider" />
   <div>
-    <Design class="illustration" />
+    <Development class="illustration" />
     <article>
       <Typo class="title" text={t('home.what_develop.title')} tag="h3" weight="black" color="secondary" size={['xxl', 'tr']} balancer />
       <MarkdownText text={t('home.what_develop.text')} color="secondary" size={['df', 'lg']}  />

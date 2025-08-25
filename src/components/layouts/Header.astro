@@ -1,6 +1,6 @@
 ---
-import Arrow from "@/assets/icons/arrow-up-right.svg";
 import Logo from "@/assets/icons/logo.svg";
+import Menu from "@/assets/icons/menu.svg";
 import Button from "@/components/Button.astro";
 import LangSwitch from "@/components/LangSwitch.astro";
 import { useTranslations } from "@/i18n/i18n";
@@ -38,7 +38,7 @@ const menu = [
   <div class="mobile-menu">
     <Button
       class="btn-menu"
-      icon={Arrow}
+      icon={Menu}
       theme="ghost"
       size="big"
       labelColor="secondary"
@@ -121,13 +121,16 @@ const menu = [
 
 .mobile-nav {
   visibility: hidden;
-  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--s-xxl);
   position: absolute;
-  top: 100%;
-  right: 0;
+  top: 4rem;
+  right: var(--s-xxl);
+  left: var(--s-xxl);
   z-index: var(--z-index-top);
-  margin-top: var(--s-xxs);
-  padding: var(--s-xxs);
+  padding: var(--s-xxs) var(--s-df);
   background: var(--c-primary);
   border-radius: var(--s-xxs);
   border: 1px solid var(--c-secondary);
@@ -137,6 +140,7 @@ const menu = [
   overflow: hidden;
   opacity: 0;
 }
+
 
 .mobile-menu.open .mobile-nav {
   opacity: 1;
