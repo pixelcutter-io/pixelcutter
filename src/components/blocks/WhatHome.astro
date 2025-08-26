@@ -1,6 +1,6 @@
 ---
-import Design from "@/assets/illustrations/design.svg";
-import Development from "@/assets/illustrations/development.svg";
+import DesignAnimation from "@/components/animations/DesignAnimation.astro";
+import DevelopmentAnimation from "@/components/animations/DevelopmentAnimation.astro";
 import MarkdownText from "@/components/typography/MarkdownText.astro";
 import Typo from "@/components/typography/Typo.astro";
 import { useTranslations } from "@/i18n/i18n";
@@ -18,17 +18,18 @@ const t = useTranslations(lang as "en" | "it");
       <Typo class="title" text={t('home.what_design.title')} tag="h3" weight="black" color="secondary" size={['xxl', 'tr']} balancer />
       <MarkdownText text={t('home.what_design.text')} color="secondary" size={['df', 'lg']}  />
     </article>
-    <Design class="illustration" />
+    <DesignAnimation class="illustration" />
   </div>
   <div class="divider" />
   <div>
-    <Development class="illustration" />
+    <DevelopmentAnimation class="illustration" />
     <article>
       <Typo class="title" text={t('home.what_develop.title')} tag="h3" weight="black" color="secondary" size={['xxl', 'tr']} balancer />
       <MarkdownText text={t('home.what_develop.text')} color="secondary" size={['df', 'lg']}  />
     </article>
   </div>
 </div>
+
 
 <style lang="scss">
 @use '@/styles/mixins/media';
@@ -68,7 +69,7 @@ const t = useTranslations(lang as "en" | "it");
   gap: var(--s-tr);
 }
 
-.what .illustration {
+.what :global(.illustration) {
   width: 60%;
   height: 60%;
   align-self: center;

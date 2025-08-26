@@ -1,0 +1,185 @@
+---
+interface Props {
+	class?: string;
+}
+const { class: className } = Astro.props;
+---
+<svg class:list={["illustration", className]} viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+  <path id="square-1" d="M58.35 0H0.75V57.6H58.35V0Z" />
+  <path id="square-2" d="M189.55 0H131.95V57.6H189.55V0Z" />
+  <path id="square-3" d="M320.75 0H263.15V57.6H320.75V0Z" />
+  <path id="square-4" d="M123.95 65.6H66.35V123.2H123.95V65.6Z" />
+  <path id="square-5" d="M255.15 65.6H197.55V123.2H255.15V65.6Z" />
+  <path id="square-6" d="M58.35 131.2H0.75V188.8H58.35V131.2Z" />
+  <path id="square-7" d="M189.55 131.2H131.95V188.8H189.55V131.2Z" />
+  <path id="square-8" d="M320.75 131.351H263.15V188.951H320.75V131.351Z" />
+  <path id="square-9" d="M123.95 196.8H66.35V254.4H123.95V196.8Z" />
+  <path id="square-10" d="M255.15 196.8H197.55V254.4H255.15V196.8Z" />
+  <path id="square-11" d="M58.35 262.4H0.75V320H58.35V262.4Z" />
+  <path id="square-12" d="M189.55 262.4H131.95V320H189.55V262.4Z" />
+  <path id="square-13" d="M320.75 262.4H263.15V320H320.75V262.4Z" />
+</svg>
+
+<script>
+  import animateOnScroll from "../../utils/animation";
+  
+  const config = [
+    {
+      target: "#square-1",
+      origin:[ 'bottom', 'right'],
+      transformations: [
+        {
+          type: 'scale',
+          start: 1.25,
+          end: 1
+        }
+      ],
+    },
+    {
+      target: "#square-2",
+      origin:[ 'bottom', 'center'],
+      transformations: [
+        {
+          type: 'scale',
+          start: 1.25,
+          end: 1
+        }
+      ],
+    },
+    {
+      target: "#square-3",
+      origin:[ 'bottom', 'left'],
+      transformations: [
+        {
+          type: 'scale',
+          start: 1.25,
+          end: 1
+        }
+      ],
+    },
+    {
+      target: "#square-4",
+      origin:[ 'center', 'center'],
+      transformations: [
+        {
+          type: 'scale',
+          start: 1.5,
+          end: 1
+        }
+      ],
+    },
+    {
+      target: "#square-5",
+      origin:[ 'center', 'center'],
+      transformations: [
+        {
+          type: 'scale',
+          start: 1.5,
+          end: 1
+        }
+      ],
+    },
+    {
+      target: "#square-6",
+      origin:[ 'right', 'center'],
+      transformations: [
+        {
+          type: 'scale',
+          start: 1.25,
+          end: 1
+        }
+      ],
+    },
+    {
+      target: "#square-7",
+      origin:[ 'center', 'center'],
+      transformations: [
+        {
+          type: 'scale',
+          start: 1.5,
+          end: 1
+        }
+      ],
+    },
+    {
+      target: "#square-8",
+      origin:[ 'left', 'center'],
+      transformations: [
+        {
+          type: 'scale',
+          start: 1.25,
+          end: 1
+        }
+      ],
+    },
+    {
+      target: "#square-9",
+      origin:[ 'center', 'center'],
+      transformations: [
+        {
+          type: 'scale',
+          start: 1.5,
+          end: 1
+        }
+      ],
+    },
+    {
+      target: "#square-10",
+      origin:[ 'center', 'center'],
+      transformations: [
+        {
+          type: 'scale',
+          start: 1.5,
+          end: 1
+        }
+      ],
+    },
+    {
+      target: "#square-11",
+      origin:[ 'top', 'right'],
+      transformations: [
+        {
+          type: 'scale',
+          start: 1.25,
+          end: 1
+        }
+      ],
+    },
+    {
+      target: "#square-12",
+      origin:[ 'top', 'center'],
+      transformations: [
+        {
+          type: 'scale',
+          start: 1.25,
+          end: 1
+        }
+      ],
+    },
+    {
+      target: "#square-13",
+      origin:[ 'top', 'left'],
+      transformations: [
+        {
+          type: 'scale',
+          start: 1.25,
+          end: 1
+        }
+      ],
+    },
+  ];
+  
+  const initializeAnimations = animateOnScroll(config);
+  initializeAnimations();
+</script>
+
+
+<style lang="scss">
+  .illustration {
+    overflow: visible;
+  }
+  
+  .illustration > path {
+    fill: var(--c-accent);
+  }
+</style>

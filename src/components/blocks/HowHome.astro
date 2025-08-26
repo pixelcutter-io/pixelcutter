@@ -29,6 +29,27 @@ const steps = ["idea", "research", "design", "development", "result"];
   </div>
 </div>
 
+<script>
+  import animateOnScroll from "../../utils/animation";
+  
+  const config = [
+    {
+      target: ".number",
+      origin:[ 'center', 'center'],
+      transformations: [
+        {
+          type: 'scale',
+          start: 0.6,
+          end: 1
+        }
+      ]
+    }
+  ]
+  
+  const initializeAnimations = animateOnScroll(config);
+  initializeAnimations();
+</script>
+
 <style lang="scss">
 @use '@/styles/mixins/media';
 @use '@/styles/mixins/utils';

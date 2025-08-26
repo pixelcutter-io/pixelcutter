@@ -1,0 +1,80 @@
+---
+interface Props {
+	class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<svg class:list={["illustration", className]} viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+  <path id="why-1" d="M160.75 0C249.056 0 320.75 71.694 320.75 160C320.75 248.306 249.056 320 160.75 320C72.444 320 0.75 248.306 0.75 160C0.75 71.694 72.444 0 160.75 0ZM160.75 8.333C77.043 8.333 9.083 76.293 9.083 160C9.083 243.707 77.043 311.667 160.75 311.667C244.457 311.667 312.417 243.707 312.417 160C312.417 76.293 244.457 8.333 160.75 8.333Z"/>
+  <path id="why-2" d="M300.75 20V300H20.75V20H300.75ZM292.417 28.333H29.083V291.667H292.417V28.333Z"/>
+  <path id="why-3" d="M160.75 21.407L299.343 160L160.75 298.593L22.157 160L160.75 21.407ZM160.75 33.192L33.942 160L160.75 286.808L287.558 160L160.75 33.192Z"/>
+  <path id="why-4" d="M160.75 90C199.384 90 230.75 121.366 230.75 160C230.75 198.634 199.384 230 160.75 230C122.116 230 90.75 198.634 90.75 160C90.75 121.366 122.116 90 160.75 90ZM160.75 98.333C126.715 98.333 99.083 125.965 99.083 160C99.083 194.035 126.715 221.667 160.75 221.667C194.785 221.667 222.417 194.035 222.417 160C222.417 125.965 194.785 98.333 160.75 98.333Z"/>
+</svg>
+
+<script>
+  import animateOnScroll from "../../utils/animation";
+  
+  const config = [
+    {
+      target: "#why-1",
+      origin:[ 'center', 'center'],
+      transformations: [
+        {
+          type: 'scale',
+          start: 1.25,
+          end: 1
+        }
+      ],
+    },
+    {
+      target: "#why-2",
+      origin:[ 'center', 'center'],
+      transformations: [
+        {
+          type: 'rotate',
+          start: 180,
+          end: 0
+        }
+      ],
+    },
+    
+    {
+      target: "#why-3",
+      origin:[ 'center', 'center'],
+      transformations: [
+        {
+          type: 'rotate',
+          start: -180,
+          end: 0
+        }
+      ],
+    },
+    
+    {
+      target: "#why-4",
+      origin:[ 'center', 'center'],
+      transformations: [
+        {
+          type: 'scale',
+          start: 0.5,
+          end: 1
+        }
+      ],
+    },
+ 
+  ];
+  
+  const initializeAnimations = animateOnScroll(config);
+  initializeAnimations();
+</script>
+
+<style lang="scss">
+  .illustration {
+    overflow: visible;
+  }
+  
+  .illustration > path {
+    fill: var(--c-accent);
+  }
+</style>

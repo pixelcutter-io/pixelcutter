@@ -24,6 +24,33 @@ const { logo, title, url, excerpt, cover, date } = Astro.props;
   </article>
 </a>
 
+<script>
+  import animateOnScroll from "../../utils/animation";
+  
+  const config = [
+    {
+      target: ".cover",
+      origin:[ "center", "top"],
+      transformations: [
+        {
+          type: 'opacity',
+          start: 0.5,
+          end: 1
+        },
+        {
+          type: 'scale',
+          start: 0.9,
+          end: 1
+        }
+      ],
+    }
+  ];
+  
+  const initializeAnimations = animateOnScroll(config);
+  initializeAnimations();
+</script>
+
+
 <style lang="scss">
 @use '@/styles/mixins/media';
 
