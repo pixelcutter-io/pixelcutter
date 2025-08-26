@@ -95,6 +95,11 @@ export async function getStaticPaths() {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas: 'title';
+  padding-inline: var(--s-xxl);
+  
+  @include media.media(lg) {
+    padding-inline: var(--s-big);
+  }
 }
 
 .hero :global(.title) {
