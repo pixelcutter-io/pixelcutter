@@ -24,10 +24,9 @@ const t = useTranslations(lang as "en" | "it");
   grid-template-columns: 1fr;
   gap: 5vw;
   
-  @include media.media(sm) {
+  @include media.media(lg) {
     grid-template-columns: 2fr 1fr;
     align-content: start;
-
   }
 }
 
@@ -39,6 +38,20 @@ const t = useTranslations(lang as "en" | "it");
 
 .why :global(.title) {
   @include utils.last-character('!');
+}
+
+.why :global(.illustration) {
+  width: 60%;
+  justify-self:  center;
+  
+  @include media.media(md) {
+    width: 40%;
+  }
+  
+  
+  @include media.media(lg) {
+    width: 100%;
+  }
 }
 
 </style>

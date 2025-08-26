@@ -51,6 +51,14 @@ const t = useTranslations(lang as "en" | "it");
   flex-direction: column;
 }
 
+.what > div:nth-child(2) {
+  flex-direction: column-reverse;
+  
+  @include media.media(sm) {
+    flex-direction: column;
+  }
+}
+
 .what article {
   gap: var(--s-xxl);
 }
@@ -71,7 +79,6 @@ const t = useTranslations(lang as "en" | "it");
 
 .what :global(.illustration) {
   width: 60%;
-  height: 60%;
   align-self: center;
 }
 
