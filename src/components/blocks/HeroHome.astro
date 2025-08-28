@@ -18,14 +18,17 @@ const t = useTranslations(lang as "en" | "it");
 <style lang="scss">
 .hero {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  gap: var(--s-xxl);
-  padding-bottom: var(--s-qt);
+  grid-template-columns: 1fr;
+  grid-template-areas: "." "." "." "text";
+  gap: var(--s-xxs);
+  padding-bottom: var(--s-db);
   padding-inline: var(--s-xxl);
   
   @include media(sm) {
     padding-bottom: 7.5rem;
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-areas: ". ." ". text" ". .";
+    gap: 0;
   }
 
   @include media(lg) {
@@ -34,10 +37,12 @@ const t = useTranslations(lang as "en" | "it");
 
   .title {
     width: 100%;
-    grid-column: 1/7;
+    grid-column: 1/3;
     grid-row: 1/4;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-template-areas: "line1 line1" "line2 line2" "line3 line3";
+    justify-content: center;
     font-size: 14vw;
     font-weight: var(--fw-black);
     text-transform: uppercase;
@@ -45,25 +50,31 @@ const t = useTranslations(lang as "en" | "it");
     position: relative;
   }
 
-  .title > *{
+  .title > * {
     width: fit-content;
-    align-self: center;
+    justify-self: center;
   }
-
-  .title *:nth-child(2){
+  
+  .title > *:nth-child(1) {
+    grid-area: line1;
+  }
+  
+  .title > *:nth-child(2) {
+    grid-area: line2;
     animation: slideLeft 2s ease-out forwards;
   }
-
+  
+  .title > *:nth-child(3) {
+    grid-area: line3;
+    animation: slideRight 2s ease-out 0.25s forwards;
+  }
+  
   @keyframes slideLeft {
     to {
       translate: -35.5% 0;
     }
   }
-
-  .title *:nth-child(3){
-    animation: slideRight 2s ease-out 0.25s forwards;
-  }
-
+  
   @keyframes slideRight {
     to {
       translate: 12% 0;
@@ -86,13 +97,18 @@ const t = useTranslations(lang as "en" | "it");
   }
 
   :global(.text) {
-    font-size: 3.25vw !important;
-    grid-column: 4/7;
-    grid-row: 2/3;
+    grid-area: text;
+    font-size: 6vw !important;
     align-self: center;
     opacity: 0;
     animation: fadeIn 1s ease-out 1.25s forwards;
     translate: 5% 0;
+    text-align: center;
+    
+    @include media(sm) {
+      font-size: 3.25vw !important;
+      text-align: left;
+    }
   }
 
   @keyframes fadeIn {

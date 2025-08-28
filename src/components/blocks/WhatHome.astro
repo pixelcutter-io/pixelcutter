@@ -11,12 +11,12 @@ const t = useTranslations(lang as "en" | "it");
 <div class="what">
   <article>
     <Typo class="title" text={t('home.what.title')} tag="h2" weight="black" color="secondary" size={['tr', 'qt']} balancer />
-    <MarkdownText text={t('home.what.text')} color="secondary" size={['lg', 'xxl']}  />
+    <MarkdownText class="text" text={t('home.what.text')} color="secondary" size={['df', 'xxl']}  />
   </article>
   <div>
     <article>
       <Typo class="title" text={t('home.what_design.title')} tag="h3" weight="black" color="secondary" size={['xxl', 'tr']} balancer />
-      <MarkdownText text={t('home.what_design.text')} color="secondary" size={['df', 'lg']}  />
+      <MarkdownText text={t('home.what_design.text')} color="secondary" size={['df', 'xxl']}  />
     </article>
     <DesignAnimation class="illustration" />
   </div>
@@ -25,7 +25,7 @@ const t = useTranslations(lang as "en" | "it");
     <DevelopmentAnimation class="illustration" />
     <article>
       <Typo class="title" text={t('home.what_develop.title')} tag="h3" weight="black" color="secondary" size={['xxl', 'tr']} balancer />
-      <MarkdownText text={t('home.what_develop.text')} color="secondary" size={['df', 'lg']}  />
+      <MarkdownText text={t('home.what_develop.text')} color="secondary" size={['df', 'xxl']}  />
     </article>
   </div>
 </div>
@@ -62,7 +62,6 @@ const t = useTranslations(lang as "en" | "it");
 
 .what > article {
   justify-self: center;
-  text-align: center;
   gap: var(--s-xxl);
   
   @include media(sm) {
@@ -85,8 +84,20 @@ const t = useTranslations(lang as "en" | "it");
   background-color: var(--c-accent);
 }
 
-.what :global(.title) {
-  @include last-character();
+.what > article > :global(.title) {
+  @include media(sm) {
+    text-align: center;
+  }
 }
+
+.what > article > :global(.text) {
+  @include media(sm) {
+    text-align: center;
+  }
+}
+  
+  .what  :global(.title) {
+    @include last-character();
+  }
 
 </style>

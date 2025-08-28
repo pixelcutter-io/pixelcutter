@@ -32,12 +32,14 @@ const style = {
 <style lang="scss">
   .section {
     width: 100%;
-    padding-top: var(--l-p-top);
-    padding-bottom: var(--l-p-bottom);
+    padding-top: var(--s-big);
+    padding-bottom: var(--s-big);
     padding-inline: var(--s-xxl);
     background-color: var(--l-bg);
     
     @include media(lg) {
+      padding-top: var(--l-p-top);
+      padding-bottom: var(--l-p-bottom);
       padding-inline: var(--s-big);
     }
   }
