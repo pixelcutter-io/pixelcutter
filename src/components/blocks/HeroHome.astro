@@ -16,7 +16,6 @@ const t = useTranslations(lang as "en" | "it");
 </div>
 
 <style lang="scss">
-@use '@/styles/mixins/media';
 .hero {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -25,11 +24,11 @@ const t = useTranslations(lang as "en" | "it");
   padding-bottom: var(--s-qt);
   padding-inline: var(--s-xxl);
   
-  @include media.media(sm) {
+  @include media(sm) {
     padding-bottom: 7.5rem;
   }
 
-  @include media.media(lg) {
+  @include media(lg) {
     padding-inline: var(--s-big);
   }
 

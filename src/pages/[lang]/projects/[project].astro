@@ -86,9 +86,7 @@ export async function getStaticPaths() {
 </Layout>
 
 <style lang="scss">
-@use '@/styles/mixins/media';
-
-.hero {
+  .hero {
   width: 100%;
   max-width: var(--w-max-sm);
   margin-inline: auto;
@@ -97,7 +95,7 @@ export async function getStaticPaths() {
   grid-template-areas: 'title';
   padding-inline: var(--s-xxl);
   
-  @include media.media(lg) {
+  @include media(lg) {
     padding-inline: var(--s-big);
   }
 }
@@ -121,8 +119,4 @@ export async function getStaticPaths() {
   color: var(--c-primary);
   opacity: 0;
 }
-
-
-
-
 </style>

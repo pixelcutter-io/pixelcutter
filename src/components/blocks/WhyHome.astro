@@ -16,15 +16,12 @@ const t = useTranslations(lang as "en" | "it");
 </div>
 
 <style lang="scss">
-@use '@/styles/mixins/media';
-@use '@/styles/mixins/utils';
-
-.why {
+  .why {
   display: grid;
   grid-template-columns: 1fr;
   gap: 5vw;
   
-  @include media.media(lg) {
+  @include media(lg) {
     grid-template-columns: 2fr 1fr;
     align-content: start;
   }
@@ -37,19 +34,19 @@ const t = useTranslations(lang as "en" | "it");
 }
 
 .why :global(.title) {
-  @include utils.last-character('!');
+  @include last-character('!');
 }
 
 .why :global(.illustration) {
   width: 60%;
   justify-self:  center;
   
-  @include media.media(md) {
+  @include media(md) {
     width: 40%;
   }
   
   
-  @include media.media(lg) {
+  @include media(lg) {
     width: 100%;
   }
 }

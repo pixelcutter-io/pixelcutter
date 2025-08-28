@@ -30,8 +30,6 @@ const style = {
 </section>
 
 <style lang="scss">
-  @use '@/styles/mixins/media';
-  
   .section {
     width: 100%;
     padding-top: var(--l-p-top);
@@ -39,7 +37,7 @@ const style = {
     padding-inline: var(--s-xxl);
     background-color: var(--l-bg);
     
-    @include media.media(lg) {
+    @include media(lg) {
       padding-inline: var(--s-big);
     }
   }
@@ -50,7 +48,7 @@ const style = {
   }
   
   .section :global(img):not(.logo) {
-    @include media.media(lg) {
+    @include media(lg) {
       width: calc(100% + 10rem);
       margin-inline: -5rem;
     }

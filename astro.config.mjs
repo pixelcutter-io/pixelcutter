@@ -7,7 +7,16 @@ export default defineConfig({
 		defaultLocale: "en",
 		locales: ["en", "it"],
 		routing: {
-		  prefixDefaultLocale: false,
+			prefixDefaultLocale: false,
+		},
+	},
+	vite: {
+		css: {
+			preprocessorOptions: {
+				scss: {
+					additionalData: `@use '@/styles/mixins' as *;`,
+				},
+			},
 		},
 	},
 });

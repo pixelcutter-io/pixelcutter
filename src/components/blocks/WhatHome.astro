@@ -32,15 +32,12 @@ const t = useTranslations(lang as "en" | "it");
 
 
 <style lang="scss">
-@use '@/styles/mixins/media';
-@use '@/styles/mixins/utils';
-
-.what {
+  .what {
   display: grid;
   grid-template-columns: 1fr;
   gap: 5vw;
   
-  @include media.media(sm) {
+  @include media(sm) {
     grid-template-columns: 1fr auto 1fr;
   }
 }
@@ -54,7 +51,7 @@ const t = useTranslations(lang as "en" | "it");
 .what > div:nth-child(2) {
   flex-direction: column-reverse;
   
-  @include media.media(sm) {
+  @include media(sm) {
     flex-direction: column;
   }
 }
@@ -68,7 +65,7 @@ const t = useTranslations(lang as "en" | "it");
   text-align: center;
   gap: var(--s-xxl);
   
-  @include media.media(sm) {
+  @include media(sm) {
     grid-column: 1/4;
   }
 }
@@ -89,7 +86,7 @@ const t = useTranslations(lang as "en" | "it");
 }
 
 .what :global(.title) {
-  @include utils.last-character();
+  @include last-character();
 }
 
 </style>

@@ -39,8 +39,6 @@ const style = {
 <Tag class:list={['text', className]} style={style} set:html={html} />
 
 <style lang="scss">
-  @use '@/styles/mixins/utils';
-
   .text {
     --lm: clamp(var(--l-fs-min), 1rem + var(--l-fs-increase), var(--l-fs-max));
     font-size: var(--lm);
@@ -138,7 +136,7 @@ const style = {
     }
 
     :global(a):focus-visible {
-      @include utils.focus-visible($radius: var(--s-uxxs));
+      @include focus-visible($radius: var(--s-uxxs));
     }
 
     :global(em) {

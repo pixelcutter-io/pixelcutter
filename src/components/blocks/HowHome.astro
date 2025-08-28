@@ -19,7 +19,7 @@ const steps = ["idea", "research", "design", "development", "result"];
           <div class="number">
             <Typo text={index + 1} tag="p" weight="black" color="primary" size={['xxl', 'big']} balancer />
           </div>
-          <article>
+          <article class="article">
             <Typo class="title" text={t(`home.how_step.${step}.title`)} tag="h3" weight="black" color="primary" size={['xxl', 'tr']} balancer />
             <MarkdownText text={t(`home.how_step.${step}.text`)} color="primary" size={['lg', 'xxl']}  />
           </article>
@@ -43,6 +43,17 @@ const steps = ["idea", "research", "design", "development", "result"];
           end: 1
         }
       ]
+    },
+    {
+      target: ".article",
+      origin:[ 'left', 'top'],
+      transformations: [
+        {
+          type: 'scale',
+          start: 0.9,
+          end: 1
+        }
+      ]
     }
   ]
   
@@ -51,16 +62,13 @@ const steps = ["idea", "research", "design", "development", "result"];
 </script>
 
 <style lang="scss">
-@use '@/styles/mixins/media';
-@use '@/styles/mixins/utils';
-
 .how {
   display: grid;
   grid-template-columns: 1fr;
   background-color: var(--c-secondary);
   gap: 5vw;
   
-  @include media.media(md) {
+  @include media(md) {
     grid-template-columns: 1fr 2fr;
   }
 }
@@ -72,7 +80,7 @@ const steps = ["idea", "research", "design", "development", "result"];
 }
 
 .how :global(.title) {
-  @include utils.last-character;
+  @include last-character;
 }
 
 .list {

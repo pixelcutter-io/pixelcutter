@@ -61,36 +61,13 @@ const menu = [
 
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const dropdown = document.querySelector('.mobile-menu');
-    const button = dropdown?.querySelector('.btn-menu');
-    const menu = dropdown?.querySelector('.mobile-nav');
-    
-    if (!dropdown || !button || !menu) return;
-    
-    button.addEventListener('click', (e) => {
-      e.preventDefault();
-      dropdown.classList.toggle('open');
-    });
-    
-    document.addEventListener('click', (e) => {
-      if (!dropdown.contains(e.target)) {
-        dropdown.classList.remove('open');
-      }
-    });
-    
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        dropdown.classList.remove('open');
-      }
-    });
-  });
+
+  import { dropdown } from '@/utils/dropdown';
+  dropdown('.mobile-menu', '.btn-menu', '.mobile-nav');
 </script>
 
 <style lang="scss">
-@use '@/styles/mixins/media';
-
-.header {
+  .header {
   height: 5rem;
   display: flex;
   align-items: center;
@@ -103,7 +80,7 @@ const menu = [
   z-index: var(--z-index-2);
   background-color: var(--c-primary);
   
-  @include media.media(sm) {
+  @include media(sm) {
     gap: var(--s-df);
     padding-inline: var(--s-big);
   }
@@ -114,7 +91,7 @@ const menu = [
 }
 
 .mobile-menu {
-  @include media.media(sm) {
+  @include media(sm) {
     display: none;
   }
 }
@@ -155,7 +132,7 @@ const menu = [
   align-items: center;
   gap: var(--s-xxl);
   
-  @include media.media(sm) {
+  @include media(sm) {
     display: flex;
   }
 }

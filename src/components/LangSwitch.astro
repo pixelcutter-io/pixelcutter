@@ -49,36 +49,13 @@ const flags = {
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const dropdown = document.querySelector('.switch-lang');
-    const button = dropdown?.querySelector('.btn-lang');
-    const menu = dropdown?.querySelector('.dropdown-lang');
-    
-    if (!dropdown || !button || !menu) return;
-    
-    button.addEventListener('click', (e) => {
-      e.preventDefault();
-      dropdown.classList.toggle('open');
-    });
-    
-    document.addEventListener('click', (e) => {
-      if (!dropdown.contains(e.target)) {
-        dropdown.classList.remove('open');
-      }
-    });
-    
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        dropdown.classList.remove('open');
-      }
-    });
-  });
+  import { dropdown } from '@/utils/dropdown';
+  dropdown('.switch-lang', '.btn-lang', '.dropdown-lang');
 </script>
 
 <style lang="scss">
-  @use '@/styles/mixins/media';
   .switch-lang {
-    @include media.media(sm) {
+    @include media(sm) {
       position: relative;
     }
   }
@@ -100,7 +77,7 @@ const flags = {
     overflow: hidden;
     opacity: 0;
     
-    @include media.media(sm) {
+    @include media(sm) {
       width: 10rem;
       top: 3rem;
       right: 0;

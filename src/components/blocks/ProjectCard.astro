@@ -52,8 +52,6 @@ const { logo, title, url, excerpt, cover, date } = Astro.props;
 
 
 <style lang="scss">
-@use '@/styles/mixins/media';
-
 .card {
   width: 100%;
   display: grid;
@@ -92,7 +90,7 @@ const { logo, title, url, excerpt, cover, date } = Astro.props;
   object-fit: cover;
   margin-top: 2rem;
 
-  @include media.media(lg) {
+  @include media(lg) {
     width: calc(100% + 10rem);
     margin-inline: -5rem;
   }

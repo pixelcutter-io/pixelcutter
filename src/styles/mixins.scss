@@ -1,0 +1,92 @@
+@use 'sass:math';
+@use 'sass:map';
+
+$breakpoints-map: (
+  sm: 768px,
+  md: 1024px,
+  lg: 1280px,
+  xl: 1440px,
+  xxl: 1920px,
+);
+$breakpoints: sm, md, lg, xl, xxl;
+
+@mixin media($breakpoint) {
+  @if map.has-key($breakpoints-map, $breakpoint) {
+    $breakpoint-value: map.get($breakpoints-map, $breakpoint);
+    
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+  }
+  
+  @if $breakpoint == touch {
+    @media (hover: none) and (pointer: coarse) {
+      @content;
+    }
+  }
+  
+  @if $breakpoint == noTouch {
+    @media (hover: hover) and (pointer: fine) {
+      @content;
+    }
+  }
+}
+
+// Overflow X
+@mixin overflow-x {
+  overflow-x: auto;
+  overflow-x: overlay;
+  -webkit-overflow-scrolling: touch;
+}
+
+// Overflow Y
+@mixin overflow-y {
+  overflow-y: auto;
+  overflow-y: overlay;
+  -webkit-overflow-scrolling: touch;
+}
+
+// Text overflow
+@mixin overflow-text {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+// Inset spacing
+@mixin inset-spacing($inset) {
+  margin-inline: calc(#{$inset} * -1);
+  padding-inline: $inset;
+}
+
+// Prevent text selection
+@mixin prevent-text-selection {
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+// Focus visibile
+@mixin focus-visible(
+  $radius: false,
+  $color: var(--c-accent),
+  $width: 0.125rem,
+  $offset: 0.125rem
+) {
+  @if $radius {
+    border-radius: $radius;
+  }
+  
+  outline: $width solid $color;
+  outline-offset: $offset;
+}
+
+
+@mixin last-character(
+  $character: '.',
+  $color: var(--c-accent),
+) {
+  &::after {
+    content: $character;
+    color: $color;
+  }
+}

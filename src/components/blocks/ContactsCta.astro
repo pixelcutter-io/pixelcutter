@@ -36,16 +36,14 @@ const { color = "secondary", align = "left" } = Astro.props;
 </div>
 
 <style lang="scss">
-@use "@/styles/mixins/utils";
-
-.contacts {
+  .contacts {
   display: flex;
   flex-direction: column;
   gap: var(--s-db);
 }
 
 .contacts :global(.title) {
-  @include utils.last-character('!');
+  @include last-character('!');
 }
 
 // If center
