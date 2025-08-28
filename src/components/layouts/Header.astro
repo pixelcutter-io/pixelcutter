@@ -90,6 +90,10 @@ const menu = [
   margin-right: auto;
 }
 
+.logo:focus-visible {
+  @include focus-visible($radius: var(--s-uxs));
+}
+
 .mobile-menu {
   @include media(sm) {
     display: none;

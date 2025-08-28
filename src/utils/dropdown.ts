@@ -23,21 +23,32 @@ export function dropdown(
 
 		button.addEventListener("click", (e) => {
 			e.preventDefault();
-			dropdown.classList.toggle(openClass);
+			const isOpen = dropdown.classList.toggle(openClass);
+
+			if (isOpen) {
+				// Spostare il focus sul menu quando aperto
+				(menu as HTMLElement).focus();
+			}
 		});
 
 		if (closeOnOutsideClick) {
 			document.addEventListener("click", (e) => {
 				if (!dropdown.contains(e.target as Node)) {
-					dropdown.classList.remove(openClass);
+					if (dropdown.classList.contains(openClass)) {
+						dropdown.classList.remove(openClass);
+						// Riportare il focus sul pulsante quando chiuso da click esterno
+						(button as HTMLElement).focus();
+					}
 				}
 			});
 		}
 
 		if (closeOnEscape) {
 			document.addEventListener("keydown", (e) => {
-				if (e.key === "Escape") {
+				if (e.key === "Escape" && dropdown.classList.contains(openClass)) {
 					dropdown.classList.remove(openClass);
+					// Riportare il focus sul pulsante quando chiuso con tasto Escape
+					(button as HTMLElement).focus();
 				}
 			});
 		}

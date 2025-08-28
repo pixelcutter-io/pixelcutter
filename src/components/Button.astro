@@ -111,6 +111,14 @@ const tagProps = {
 }
 
 
+.btn:focus-visible {
+  outline: none;
+}
+
+.btn:focus-visible > * {
+  @include focus-visible();
+ }
+
 .btn:active > * {
   scale: 0.96;
 }

@@ -1,6 +1,7 @@
 ---
 import "@/styles/main.scss";
-import { getLangFromUrl } from "../../i18n/i18n";
+import { getLangFromUrl, useTranslations } from "../../i18n/i18n";
+import Button from "../Button.astro";
 import Footer from "./Footer.astro";
 import Header from "./Header.astro";
 
@@ -12,6 +13,7 @@ interface Props {
 const { theme = "default" } = Astro.props;
 
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang as "en" | "it");
 ---
 
 <!doctype html>
@@ -24,8 +26,10 @@ const lang = getLangFromUrl(Astro.url);
 		<title>Pixelcutter - Digital tailoring</title>
 	</head>
 	<body>
+  <Button class="skip" label={t("action.skip_content")} href="#main_content"/>
+ 
 	<Header />
-	<main class:list={["main", theme]}>
+	<main id="main_content" class:list={["main", theme]}>
 	  <slot />
 		<Footer />
 	</main>
@@ -44,4 +48,18 @@ const lang = getLangFromUrl(Astro.url);
 .contacts {
   padding-top: 0;
 }
+  
+  // Skip link
+  :global(.skip) {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    z-index: var(--z-index-top);
+  }
+  
+  :global(.skip):focus-visible {
+    @include focus-visible;
+    top: 1rem;
+    left: 1rem;
+  }
 </style>

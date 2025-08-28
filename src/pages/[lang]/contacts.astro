@@ -2,12 +2,11 @@
 import Layout from "@/components/layouts/Layout.astro";
 import Typo from "@/components/typography/Typo.astro";
 
-import { useTranslations, getStaticPaths } from "@/i18n/i18n";
-
+import { getStaticPaths, useTranslations } from "@/i18n/i18n";
 
 export { getStaticPaths };
 const { lang } = Astro.params;
-const t = useTranslations(lang as 'en' | 'it');
+const t = useTranslations(lang as "en" | "it");
 ---
 
 <Layout theme="contacts">
@@ -39,7 +38,7 @@ const t = useTranslations(lang as 'en' | 'it');
   font-weight: var(--fw-bold);
   font-size: clamp(var(--s-db), 1rem + 7vw,  var(--s-dc));
   line-height: 1;
-  text-align: cebter;
+  text-align: center;
   color: var(--c-secondary);
   transition: var(--transition-025);
 }
@@ -55,5 +54,9 @@ const t = useTranslations(lang as 'en' | 'it');
 
 .email:hover {
   color: var(--c-accent);
+}
+
+.email:focus-visible {
+  @include focus-visible($radius: var(--s-xxs));
 }
 </style>
