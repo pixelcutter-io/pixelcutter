@@ -33,7 +33,7 @@ const menu = [
 
 <header class="header">
   <a class="logo" href={`/${lang}/`}>
-    <Logo  height={'var(--s-xxl)'} fill={'var(--c-secondary)'}/>
+    <Logo height={'var(--s-xxl)'} fill={'var(--c-secondary)'}/>
   </a>
   <div class="mobile-menu">
     <Button
@@ -68,76 +68,80 @@ const menu = [
 
 <style lang="scss">
   .header {
-  height: 5rem;
-  display: flex;
-  align-items: center;
-  gap: var(--s-uxs);
-  padding-inline: var(--s-xxl);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: var(--z-index-2);
-  background-color: var(--c-primary);
-  
-  @include media(sm) {
-    gap: var(--s-df);
-    padding-inline: var(--s-big);
-  }
-}
-
-.logo {
-  margin-right: auto;
-}
-
-.logo:focus-visible {
-  @include focus-visible($radius: var(--s-uxs));
-}
-
-.mobile-menu {
-  @include media(sm) {
-    display: none;
-  }
-}
-
-.mobile-nav {
-  visibility: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: var(--s-xxl);
-  position: absolute;
-  top: 4rem;
-  right: var(--s-xxl);
-  left: var(--s-xxl);
-  z-index: var(--z-index-top);
-  padding: var(--s-xxs) var(--s-df);
-  background: var(--c-primary);
-  border-radius: var(--s-xxs);
-  border: 1px solid var(--c-secondary);
-  box-shadow: var(--sw-dp8);
-  transform: translateY(-0.5rem);
-  transition: var(--transition-025);
-  overflow: hidden;
-  opacity: 0;
-}
-
-
-.mobile-menu.open .mobile-nav {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.desktop-nav {
-  display: none;
-  margin-left: auto;
-  justify-content: flex-end;
-  align-items: center;
-  gap: var(--s-xxl);
-  
-  @include media(sm) {
+    height: 5rem;
     display: flex;
+    align-items: center;
+    gap: var(--s-uxs);
+    padding-inline: var(--s-xxl);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-index-2);
+    background-color: var(--c-primary);
+    
+    @include media(sm) {
+      gap: var(--s-df);
+      padding-inline: var(--s-big);
+    }
   }
-}
+  
+  .logo {
+    margin-right: auto;
+  }
+  
+  .logo:focus-visible {
+    @include focus-visible($radius: var(--s-uxs));
+  }
+  
+  .logo > svg {
+    height: var(--s-xxl);
+  }
+  
+  .mobile-menu {
+    @include media(sm) {
+      display: none;
+    }
+  }
+  
+  .mobile-nav {
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--s-xxl);
+    position: absolute;
+    top: 4rem;
+    right: var(--s-xxl);
+    left: var(--s-xxl);
+    z-index: var(--z-index-top);
+    padding: var(--s-xxs) var(--s-df);
+    background: var(--c-primary);
+    border-radius: var(--s-xxs);
+    border: 1px solid var(--c-secondary);
+    box-shadow: var(--sw-dp8);
+    transform: translateY(-0.5rem);
+    transition: var(--transition-025);
+    overflow: hidden;
+    opacity: 0;
+  }
+  
+  
+  .mobile-menu.open .mobile-nav {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .desktop-nav {
+    display: none;
+    margin-left: auto;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--s-xxl);
+    
+    @include media(sm) {
+      display: flex;
+    }
+  }
 </style>
