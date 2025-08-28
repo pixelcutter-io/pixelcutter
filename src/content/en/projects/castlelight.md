@@ -2,13 +2,22 @@
 slug: castlelight
 logo: "/logos/logo_castlelight.svg"
 title: Castle light
-excerpt: "Vestibulum id ligula porta felis euismod semper. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Etiam porta sem malesuada magna mollis euismod."
-cover: "https://placehold.co/600x400"
-tags: ["React", "Astro", "SCSS"]
+excerpt: "Born from the doodles made to keep little Misha entertained during moments of waiting, Castle Light is a small picture quiz designed to offer users a short and fun moment of entertainment."
+cover:  "/images/castlelight_1.png"
+tags: ["react", "typescript", "sass", "notion"]
 date: 2024-08-15
-website: ""
-github: ""
-gitlab: ""
+website: "www.castlelight.net"
 ---
 
-Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam quis risus eget urna mollis ornare vel eu leo. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Sed posuere consectetur est at lobortis.
+
+Castle Light was born as a small picture quiz designed to offer users a simple and engaging moment of entertainment. The goal is to illuminate hidden fragments of images to reveal the mystery underneath, with intuitive and fun gameplay.
+
+![enter image description here](/images/castlelight_2.png)
+
+The project was developed in React, ensuring a smooth and responsive experience, while Notion is used as a database to manage the player leaderboard. The public leaderboard not only organizes scores efficiently but also encourages friendly competition, adding a fun and social element to the game.
+
+![enter image description here](/images/castlelight_3.png)
+
+Castle Light is designed to be accessible across different devices, with a simple and straightforward design. Attention to usability and a lightweight experience makes the game perfect for short breaks or moments of leisure, turning a small quiz into a carefully crafted, personal, and social digital project.
+
+![enter image description here](/images/castlelight_4.png)

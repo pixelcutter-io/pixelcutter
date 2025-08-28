@@ -1,9 +1,12 @@
 ---
 title: Le mani e le menti di Pixelcutter
 ---
+Non siamo una corporate agency, niente uffici alla moda con tavoli da ping-pong o kombucha gratis alla spina. Solo **Sasha** e **Maurizio**, due creativi appassionati che credono che le migliori soluzioni digitali nascano dalla comprensione dei problemi reali.
 
-We're not a corporate agency, no flashy offices with ping-pong tables or free kombucha on tap. Just Sasha and Maurizio, two passionate creators who believe that the best digital solutions come from understanding real problems – because we've faced them ourselves.
+**Pixelcutter** nasce infatti dal voler ridurre il divario che esiste tra avere una grande idea e realizzarla. Lavorando ogni giorno come designer e sviluppatori, abbiamo accumulato competenze, intuizioni e trucchi del mestiere che ora condividiamo con chi ha bisogno di una mano per trasformare in realtà la propria idea.
 
-[image]
+Ogni progetto nasce da un «e se…?», un momento magico che ci ricorda ogni volta perché amiamo creare esperienze digitali.
 
-We're **Pixelcutter**, a creative partnership born from a simple realization: the gap between having a great idea and bringing it to life shouldn't be so wide. As developers and designers working in the trenches every day, we've collected countless skills, insights, and hard-won tricks. Rather than keeping them to ourselves, we decided to share them with people who have brilliant ideas but need help making them real.
+**Concentrati sulle persone, sempre!** In un mondo dominato da template generati dall’IA e soluzioni automatizzate, la creatività umana e la cura artigianale contano più che mai. Non ci limitiamo a eseguire richieste: esploriamo a fondo i problemi per proporre soluzioni davvero efficaci. Non siamo fornitori, ma partner.
+
+Collaborando con noi, avrai membri del team che si prendono cura del tuo successo tanto quanto te, pronti a celebrare i traguardi, imparare dagli errori e rimanere al tuo fianco nel tempo.

@@ -61,6 +61,7 @@ const { logo, title, url, excerpt, cover, date } = Astro.props;
 
 .card :global(.date) {
   grid-area: date;
+  margin-bottom: var(--s-df);
 }
 
 .card :global(.title) {
@@ -89,6 +90,7 @@ const { logo, title, url, excerpt, cover, date } = Astro.props;
   aspect-ratio: 16/9;
   object-fit: cover;
   margin-top: 2rem;
+  background-color: var(--c-secondary);
 
   @include media(lg) {
     width: calc(100% + 10rem);

@@ -16,14 +16,20 @@ interface Props {
 const { info } = Astro.props;
 
 if (!info.length) return;
+
+const filteredInfo = info.filter(
+	(item) => (item.tags && item.tags.length > 0) || item.url || item.date,
+);
+
+if (!filteredInfo.length) return;
 ---
 <div class="list">
-  {info.map((item) => (
+  {filteredInfo.map((item) => (
     <div class="info">
-      <Typo text={item.label} size={['lg', 'xxl']}/>
-      {item.date &&   <Typo class="date" text={new Date(item.date).getFullYear().toString()} weight="semi" color="accent" size={['lg', 'qr']}/>}
+      <Typo text={item.label} size={['df', 'xxl']}/>
+      {item.date && <Typo class="date" text={new Date(item.date).getFullYear().toString()} weight="semi" color="accent" size={['lg', 'tr']}/>}
       {item.url && <a href={`https://${item.url}`} target="_blank">
-        <Typo class="date" text={item.url} weight="semi" color="accent" size={['lg', 'qr']}/>
+        <Typo class="date" text={item.url} weight="semi" color="accent" size={['lg', 'tr']}/>
       </a>}
       {item.tags &&
         <div class="tags">

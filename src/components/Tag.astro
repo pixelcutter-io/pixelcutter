@@ -1,6 +1,10 @@
 ---
+import DatoCms from "@/assets/tags/datocms.svg";
+import Notion from "@/assets/tags/notion.svg";
 import React from "@/assets/tags/react.svg";
 import Sass from "@/assets/tags/sass.svg";
+import TypeScript from "@/assets/tags/typescript.svg";
+import Vue from "@/assets/tags/vue.svg";
 import { useTranslations } from "@/i18n/i18n";
 import Typo from "./typography/Typo.astro";
 
@@ -15,7 +19,11 @@ const t = useTranslations(lang as "en" | "it");
 
 const iconMap = {
 	react: React,
+	typescript: TypeScript,
 	sass: Sass,
+	vue: Vue,
+	datocms: DatoCms,
+	notion: Notion,
 };
 
 const Icon = iconMap[tag as keyof typeof iconMap] || null;
@@ -24,7 +32,7 @@ if (!Icon) return;
 ---
 
 <div class="tag">
-  <Icon width="5rem" height="5rem" fill="var(--c-accent)" />
+  <Icon width="4rem" height="4rem" fill="var(--c-accent)" />
   <Typo text={t(`label.${tag}`)} color="accent" size={['md', 'lg']} />
 </div>
 

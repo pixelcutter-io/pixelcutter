@@ -6,9 +6,11 @@ import ContactsCta from "../../../components/blocks/ContactsCta.astro";
 import ProjectInfo from "../../../components/blocks/ProjectInfo.astro";
 import Section from "../../../components/layouts/Section.astro";
 import Tag from "../../../components/Tag.astro";
+import { useTranslations } from "../../../i18n/i18n";
 
 // Parametri della route
 const { lang, project } = Astro.params;
+const t = useTranslations(lang as "en" | "it");
 
 // Carica tutti i file Markdown dei progetti
 const allProjects = import.meta.glob("../../../content/*/projects/*.md");
@@ -54,26 +56,26 @@ export async function getStaticPaths() {
   </div>
 
   <Section maxWidth="sm" padding={["st", "uxxs"]}>
-    <MarkdownText text={projectContent.rawContent()} size={['lg', 'xxl']}/>
+    <MarkdownText class="content" text={projectContent.rawContent()} size={['lg', 'xxl']}/>
   </Section>
   
   
   <Section maxWidth="sm" padding={["uxxs", "st"]}>
     <ProjectInfo info={[
       {
-        label:"TBT Year",
+        label:t("label.year"),
         date: projectContent.frontmatter.date
       },
       {
-        label: "TBT Under the hood",
+        label:t("label.stack"),
         tags: projectContent.frontmatter.tags
       },
       {
-        label: "TBT Look in action",
+        label:t("label.website"),
         url: projectContent.frontmatter.website
       },
       {
-        label: "TBT View the code",
+        label:t("label.git"),
         url: projectContent.frontmatter.git
       }
     ]} />
@@ -87,36 +89,40 @@ export async function getStaticPaths() {
 
 <style lang="scss">
   .hero {
-  width: 100%;
-  max-width: var(--w-max-sm);
-  margin-inline: auto;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-areas: 'title';
-  padding-inline: var(--s-xxl);
-  
-  @include media(lg) {
-    padding-inline: var(--s-big);
+    width: 100%;
+    max-width: var(--w-max-sm);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'title';
+    padding-inline: var(--s-xxl);
+    
+    @include media(md) {
+      padding-inline: 0;
+    }
   }
-}
 
-.hero :global(.title) {
-  grid-area: title;
-  align-self: center;
-  text-transform: uppercase;
-}
+  .hero :global(.title) {
+    grid-area: title;
+    align-self: center;
+    text-transform: uppercase;
+  }
 
-.logo {
-  grid-area: title;
-  align-self: center;
-  max-width: 50%;
-  max-height: var(--s-sp);
-  transition: var(--transition-025);
-}
+  .logo {
+    grid-area: title;
+    align-self: center;
+    max-width: 50%;
+    max-height: var(--s-sp);
+    transition: var(--transition-025);
+  }
 
-// If has logo hide title
-.hero:has(.logo) :global(.title) {
-  color: var(--c-primary);
-  opacity: 0;
-}
+  // If has logo hide title
+  .hero:has(.logo) :global(.title) {
+    color: var(--c-primary);
+    opacity: 0;
+  }
+
+  :global(.content) :global(img) {
+    background-color: var(--c-secondary);
+  }
 </style>
