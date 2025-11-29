@@ -2,11 +2,9 @@
 import Logo from "@/assets/icons/logo.svg";
 import Menu from "@/assets/icons/menu.svg";
 import Button from "@/components/Button.astro";
-import LangSwitch from "@/components/LangSwitch.astro";
 import { useTranslations } from "@/i18n/i18n";
 
-const { lang } = Astro.params;
-const t = useTranslations(lang as "en" | "it");
+const t = useTranslations("en");
 
 const menu = [
 	{
@@ -32,7 +30,7 @@ const menu = [
 ---
 
 <header class="header">
-  <a class="logo" href={`/${lang}/`}>
+  <a class="logo" href="/">
     <Logo height={'var(--s-xxl)'} fill={'var(--c-secondary)'}/>
   </a>
   <div class="mobile-menu">
@@ -46,17 +44,16 @@ const menu = [
     />
     <nav class="mobile-nav">
       {menu.map((item) => (
-        <Button label={item.label} href={`/${lang}${item.path}`} theme={item.theme} size="big" labelColor={item.labelColor} hoverLabelColor={item.hoverLabelColor} />
+        <Button label={item.label} href={item.path} theme={item.theme} size="big" labelColor={item.labelColor} hoverLabelColor={item.hoverLabelColor} />
       ))}
     </nav>
   </div>
-  
+
   <nav class="desktop-nav">
     {menu.map((item) => (
-      <Button label={item.label} href={`/${lang}${item.path}`} theme={item.theme} size="big" labelColor={item.labelColor} hoverLabelColor={item.hoverLabelColor} />
+      <Button label={item.label} href={item.path} theme={item.theme} size="big" labelColor={item.labelColor} hoverLabelColor={item.hoverLabelColor} />
     ))}
   </nav>
-  <LangSwitch />
 </header>
 
 

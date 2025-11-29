@@ -3,14 +3,9 @@ import ContactsCta from "@/components/blocks/ContactsCta.astro";
 import HeroPage from "@/components/blocks/HeroPage.astro";
 import Layout from "@/components/layouts/Layout.astro";
 import MarkdownText from "@/components/typography/MarkdownText.astro";
+import Section from "@/components/layouts/Section.astro";
 
-import { getStaticPaths } from "@/i18n/i18n";
-import Section from "../../components/layouts/Section.astro";
-
-export { getStaticPaths };
-const { lang } = Astro.params;
-
-const about = await import(`../../content/${lang}/about.md`);
+const about = await import("../content/en/about.md");
 ---
 
 <Layout theme="default">

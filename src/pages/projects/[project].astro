@@ -2,24 +2,21 @@
 import Layout from "@/components/layouts/Layout.astro";
 import MarkdownText from "@/components/typography/MarkdownText.astro";
 import Typo from "@/components/typography/Typo.astro";
-import ContactsCta from "../../../components/blocks/ContactsCta.astro";
-import ProjectInfo from "../../../components/blocks/ProjectInfo.astro";
-import Section from "../../../components/layouts/Section.astro";
-import Tag from "../../../components/Tag.astro";
-import { useTranslations } from "../../../i18n/i18n";
+import ContactsCta from "../../components/blocks/ContactsCta.astro";
+import ProjectInfo from "../../components/blocks/ProjectInfo.astro";
+import Section from "../../components/layouts/Section.astro";
+import { useTranslations } from "../../i18n/i18n";
 
 // Parametri della route
-const { lang, project } = Astro.params;
-const t = useTranslations(lang as "en" | "it");
+const { project } = Astro.params;
+const t = useTranslations("en");
 
-// Carica tutti i file Markdown dei progetti
-const allProjects = import.meta.glob("../../../content/*/projects/*.md");
+// Carica tutti i file Markdown dei progetti in inglese
+const allProjects = import.meta.glob("../../content/en/projects/*.md");
 
-// Carica tutti i progetti della lingua in parallelo
+// Carica tutti i progetti in parallelo
 const projectList = await Promise.all(
-	Object.entries(allProjects)
-		.filter(([path]) => path.includes(`/${lang}/projects/`))
-		.map(([_, resolver]) => resolver()),
+	Object.values(allProjects).map((resolver) => resolver()),
 );
 
 // Trova il progetto corrispondente allo slug
@@ -30,18 +27,17 @@ const projectContent = projectList.find(
 
 // Se non esiste, genera errore 404
 if (!projectContent) {
-	throw new Error(`Project "${project}" not found for language "${lang}"`);
+	throw new Error(`Project "${project}" not found`);
 }
 
 // Genera tutte le rotte dinamiche in fase di build
 export async function getStaticPaths() {
-	const allProjects = import.meta.glob("../../../content/*/projects/*.md");
+	const allProjects = import.meta.glob("../../content/en/projects/*.md");
 
-	const paths = Object.entries(allProjects)
-		.map(([path]) => {
-			const langFromPath = path.includes("/en/") ? "en" : "it";
+	const paths = Object.keys(allProjects)
+		.map((path) => {
 			const slug = path.split("/").pop()?.replace(".md", "");
-			return slug ? { params: { lang: langFromPath, project: slug } } : null;
+			return slug ? { params: { project: slug } } : null;
 		})
 		.filter(Boolean);
 

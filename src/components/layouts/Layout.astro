@@ -1,6 +1,5 @@
 ---
 import "@/styles/main.scss";
-import { getLangFromUrl, useTranslations } from "../../i18n/i18n";
 import Button from "../Button.astro";
 import Footer from "./Footer.astro";
 import Header from "./Header.astro";
@@ -10,24 +9,21 @@ interface Props {
 }
 
 const { theme = "default" } = Astro.props;
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang as "en" | "it");
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
     <meta property="og:image" content="/og_img.png" />
 		<meta name="generator" content={Astro.generator} />
-    <meta name="description" content={t("meta.description")}/>
-		<title>{t("meta.title")}</title>
+    <meta name="description" content="We make real your ideas and make them unique, with an handmade design and development."/>
+		<title>Pixelcutter - Digital tailoring</title>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 	</head>
 	<body>
-  <Button class="skip" label={t("action.skip_content")} href="#main_content"/>
+  <Button class="skip" label="Skip to content" href="#main_content"/>
 	<Header />
 	<main id="main_content" class:list={["main", theme]}>
 	  <slot />

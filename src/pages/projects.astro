@@ -4,31 +4,23 @@ import HeroPage from "@/components/blocks/HeroPage.astro";
 import ProjectCard from "@/components/blocks/ProjectCard.astro";
 import Layout from "@/components/layouts/Layout.astro";
 import MarkdownText from "@/components/typography/MarkdownText.astro";
-import { getStaticPaths, useTranslations } from "@/i18n/i18n";
-import Section from "../../components/layouts/Section.astro";
+import { useTranslations } from "@/i18n/i18n";
+import Section from "@/components/layouts/Section.astro";
 
-export { getStaticPaths };
+const t = useTranslations("en");
 
-const { lang } = Astro.params;
-const t = useTranslations(lang as "en" | "it");
-
-// Importa tutti i progetti (tutte le lingue)
-const allProjects = import.meta.glob("../../content/*/projects/*.md");
-
-// Filtra solo i progetti della lingua corrente
-const projectEntries = Object.entries(allProjects).filter(([path]) =>
-	path.includes(`/${lang}/projects/`),
-);
+// Importa tutti i progetti in inglese
+const allProjects = import.meta.glob("../content/en/projects/*.md");
 
 // Carica tutti i progetti in parallelo
 const projects = await Promise.all(
-	projectEntries.map(async ([path, resolver]) => {
+	Object.entries(allProjects).map(async ([path, resolver]) => {
 		const module = await resolver();
 		const slug = path.split("/").pop()?.replace(".md", "") || "";
 		return {
 			...module.frontmatter,
 			slug: module.frontmatter?.slug || slug,
-			url: `/${lang}/projects/${module.frontmatter?.slug || slug}`,
+			url: `/projects/${module.frontmatter?.slug || slug}`,
 		};
 	}),
 );

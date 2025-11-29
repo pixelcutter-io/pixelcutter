@@ -10,8 +10,7 @@ interface Props {
 	align?: AlignType;
 }
 
-const { lang } = Astro.params;
-const t = useTranslations(lang as "en" | "it");
+const t = useTranslations("en");
 const { color = "secondary", align = "left" } = Astro.props;
 ---
 
@@ -28,7 +27,7 @@ const { color = "secondary", align = "left" } = Astro.props;
   <Button
     label={t("action.contact")}
     icon={Arrow}
-    href={`/${lang}/contacts`}
+    href="/contacts"
     size="tr"
     hoverBgColor={color === "secondary" ? "secondary" : "primary" }
     hoverLabelColor={color === "secondary" ? "primary": "secondary"}

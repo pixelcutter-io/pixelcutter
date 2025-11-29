@@ -2,8 +2,7 @@
 import MarkdownText from "@/components/typography/MarkdownText.astro";
 import { useTranslations } from "@/i18n/i18n";
 
-const { lang } = Astro.params;
-const t = useTranslations(lang as "en" | "it");
+const t = useTranslations("en");
 const currentYear = new Date().getFullYear();
 ---
 

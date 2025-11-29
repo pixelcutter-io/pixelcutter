@@ -5,8 +5,7 @@ import MarkdownText from "@/components/typography/MarkdownText.astro";
 import Typo from "@/components/typography/Typo.astro";
 import { useTranslations } from "@/i18n/i18n";
 
-const { lang } = Astro.params;
-const t = useTranslations(lang as "en" | "it");
+const t = useTranslations("en");
 ---
 <div class="what">
   <article>

@@ -1,4 +1,25 @@
 ---
-// Redirect automatico alla lingua di default
-return Astro.redirect('/en');
+import ContactsCta from "@/components/blocks/ContactsCta.astro";
+import HeroHome from "@/components/blocks/HeroHome.astro";
+import HowHome from "@/components/blocks/HowHome.astro";
+import WhatHome from "@/components/blocks/WhatHome.astro";
+import WhyHome from "@/components/blocks/WhyHome.astro";
+import Layout from "@/components/layouts/Layout.astro";
+import Section from "@/components/layouts/Section.astro";
 ---
+
+<Layout theme="home">
+  <HeroHome />
+  <Section bgColor="secondary">
+    <WhyHome />
+  </Section>
+  <Section>
+    <WhatHome />
+  </Section>
+  <Section bgColor="secondary">
+    <HowHome/>
+  </Section>
+  <Section>
+    <ContactsCta />
+  </Section>
+</Layout>

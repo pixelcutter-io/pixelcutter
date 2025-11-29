@@ -14,8 +14,7 @@ interface Props {
 
 const { tag } = Astro.props;
 
-const { lang } = Astro.params;
-const t = useTranslations(lang as "en" | "it");
+const t = useTranslations("en");
 
 const iconMap = {
 	react: React,

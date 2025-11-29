@@ -1,9 +1,8 @@
 ---
-import { getStaticPaths, useTranslations } from "@/i18n/i18n";
+import { useTranslations } from "@/i18n/i18n";
 import Typo from "../typography/Typo.astro";
 
-const { lang } = Astro.params;
-const t = useTranslations(lang as "en" | "it");
+const t = useTranslations("en");
 ---
 
 <div class="hero">
