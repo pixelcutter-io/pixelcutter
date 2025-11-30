@@ -3,16 +3,13 @@ import ContactsCta from "@/components/blocks/ContactsCta.astro";
 import HeroPage from "@/components/blocks/HeroPage.astro";
 import ProjectCard from "@/components/blocks/ProjectCard.astro";
 import Layout from "@/components/layouts/Layout.astro";
-import MarkdownText from "@/components/typography/MarkdownText.astro";
-import { useTranslations } from "@/i18n/i18n";
 import Section from "@/components/layouts/Section.astro";
+import MarkdownText from "@/components/typography/MarkdownText.astro";
 
-const t = useTranslations("en");
+const texts = await import("../content/projects.md");
 
-// Importa tutti i progetti in inglese
-const allProjects = import.meta.glob("../content/en/projects/*.md");
+const allProjects = import.meta.glob("../content/projects/*.md");
 
-// Carica tutti i progetti in parallelo
 const projects = await Promise.all(
 	Object.entries(allProjects).map(async ([path, resolver]) => {
 		const module = await resolver();
@@ -32,9 +29,9 @@ projects.sort(
 ---
 
 <Layout theme="default">
-  <HeroPage title={t('projects.title')} />
+  <HeroPage title={texts.frontmatter.title} />
   <Section maxWidth="sm" padding={["st", "uxxs"]}>
-    <MarkdownText text={t('projects.text')} size={['lg', 'xxl']}/>
+    <MarkdownText text={texts.rawContent()} size={['lg', 'xxl']} />
   </Section>
   <Section  maxWidth="sm">
     <div class="list">

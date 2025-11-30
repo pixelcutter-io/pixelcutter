@@ -3,30 +3,39 @@ import DesignAnimation from "@/components/animations/DesignAnimation.astro";
 import DevelopmentAnimation from "@/components/animations/DevelopmentAnimation.astro";
 import MarkdownText from "@/components/typography/MarkdownText.astro";
 import Typo from "@/components/typography/Typo.astro";
-import { useTranslations } from "@/i18n/i18n";
 
-const t = useTranslations("en");
+interface Props {
+  title?: string;
+  text?: string;
+  items?: Array<{ title: string; text: string }>;
+}
+
+const { title, text, items = [] } = Astro.props;
 ---
 <div class="what">
   <article>
-    <Typo class="title" text={t('home.what.title')} tag="h2" weight="black" color="secondary" size={['tr', 'qt']} balancer />
-    <MarkdownText class="text" text={t('home.what.text')} color="secondary" size={['df', 'xxl']}  />
+    {title && <Typo class="title" text={title} tag="h2" weight="black" color="secondary" size={['tr', 'qt']} balancer />}
+    {text && <MarkdownText class="text" text={text} color="secondary" size={['df', 'xxl']}  />}
   </article>
-  <div>
-    <article>
-      <Typo class="title" text={t('home.what_design.title')} tag="h3" weight="black" color="secondary" size={['xxl', 'tr']} balancer />
-      <MarkdownText text={t('home.what_design.text')} color="secondary" size={['df', 'xxl']}  />
-    </article>
-    <DesignAnimation class="illustration" />
-  </div>
+  {items[0] && (
+    <div>
+      <article>
+        <Typo class="title" text={items[0].title} tag="h3" weight="black" color="secondary" size={['xxl', 'tr']} balancer />
+        <MarkdownText text={items[0].text} color="secondary" size={['df', 'xxl']}  />
+      </article>
+      <DesignAnimation class="illustration" />
+    </div>
+  )}
   <div class="divider" />
-  <div>
-    <DevelopmentAnimation class="illustration" />
-    <article>
-      <Typo class="title" text={t('home.what_develop.title')} tag="h3" weight="black" color="secondary" size={['xxl', 'tr']} balancer />
-      <MarkdownText text={t('home.what_develop.text')} color="secondary" size={['df', 'xxl']}  />
-    </article>
-  </div>
+  {items[1] && (
+    <div>
+      <DevelopmentAnimation class="illustration" />
+      <article>
+        <Typo class="title" text={items[1].title} tag="h3" weight="black" color="secondary" size={['xxl', 'tr']} balancer />
+        <MarkdownText text={items[1].text} color="secondary" size={['df', 'xxl']}  />
+      </article>
+    </div>
+  )}
 </div>
 
 

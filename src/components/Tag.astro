@@ -1,8 +1,10 @@
 ---
 import DatoCms from "@/assets/tags/datocms.svg";
+import NextJs from "@/assets/tags/nextjs.svg";
 import Notion from "@/assets/tags/notion.svg";
 import React from "@/assets/tags/react.svg";
 import Sass from "@/assets/tags/sass.svg";
+import Supabase from "@/assets/tags/supabse.svg";
 import TypeScript from "@/assets/tags/typescript.svg";
 import Vue from "@/assets/tags/vue.svg";
 import { useTranslations } from "@/i18n/i18n";
@@ -23,6 +25,8 @@ const iconMap = {
 	vue: Vue,
 	datocms: DatoCms,
 	notion: Notion,
+	nextjs: NextJs,
+	supabase: Supabase,
 };
 
 const Icon = iconMap[tag as keyof typeof iconMap] || null;

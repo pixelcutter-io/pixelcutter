@@ -1,8 +1,11 @@
 ---
-import { useTranslations } from "@/i18n/i18n";
 import Typo from "../typography/Typo.astro";
 
-const t = useTranslations("en");
+interface Props {
+	text?: string;
+}
+
+const { text } = Astro.props;
 ---
 
 <div class="hero">
@@ -11,7 +14,7 @@ const t = useTranslations("en");
     <span>design</span>
     <span><em>&</em>develop</span>
   </h1>
-  <Typo class="text" text={t('home.hero.text')} tag="p" color="accent" balancer/>
+  {text && <Typo class="text" text={text} tag="p" color="accent" balancer/>}
 </div>
 
 <style lang="scss">

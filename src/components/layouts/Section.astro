@@ -1,5 +1,5 @@
 ---
-import type { ColorType, MaxWidth, SizeType } from "../../types/components";
+import type { ColorType, MaxWidth, SizeType } from "@/types/components.ts";
 
 interface Props {
 	maxWidth?: MaxWidth;
@@ -49,10 +49,10 @@ const style = {
     margin-inline: auto;
   }
   
-  .section :global(img):not(.logo) {
-    @include media(lg) {
-      width: calc(100% + 10rem);
-      margin-inline: -5rem;
-    }
-  }
+  /*.section :global(img):not(.logo) {*/
+  /*  @include media(lg) {*/
+  /*    width: calc(100% + 10rem);*/
+  /*    margin-inline: -5rem;*/
+  /*  }*/
+  /*}*/
 </style>

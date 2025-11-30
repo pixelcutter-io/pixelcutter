@@ -1,38 +1,37 @@
 ---
 import Layout from "@/components/layouts/Layout.astro";
+
 import MarkdownText from "@/components/typography/MarkdownText.astro";
 import Typo from "@/components/typography/Typo.astro";
+import { useTranslations } from "@/i18n/i18n.ts";
 import ContactsCta from "../../components/blocks/ContactsCta.astro";
 import ProjectInfo from "../../components/blocks/ProjectInfo.astro";
 import Section from "../../components/layouts/Section.astro";
-import { useTranslations } from "../../i18n/i18n";
 
-// Parametri della route
-const { project } = Astro.params;
 const t = useTranslations("en");
 
-// Carica tutti i file Markdown dei progetti in inglese
-const allProjects = import.meta.glob("../../content/en/projects/*.md");
+const { project } = Astro.params;
 
-// Carica tutti i progetti in parallelo
+const allProjects = import.meta.glob("../../content/projects/*.md");
+
 const projectList = await Promise.all(
 	Object.values(allProjects).map((resolver) => resolver()),
 );
 
-// Trova il progetto corrispondente allo slug
 const projectContent = projectList.find(
 	(mod) =>
 		(mod.frontmatter.slug || mod.frontmatter.title.toLowerCase()) === project,
 );
 
-// Se non esiste, genera errore 404
 if (!projectContent) {
 	throw new Error(`Project "${project}" not found`);
 }
 
-// Genera tutte le rotte dinamiche in fase di build
+const { title, logo, date, tags, website, git } = projectContent.frontmatter;
+const content = projectContent.rawContent();
+
 export async function getStaticPaths() {
-	const allProjects = import.meta.glob("../../content/en/projects/*.md");
+	const allProjects = import.meta.glob("../../content/projects/*.md");
 
 	const paths = Object.keys(allProjects)
 		.map((path) => {
@@ -47,32 +46,32 @@ export async function getStaticPaths() {
 
 <Layout>
   <div class="hero">
-    {projectContent.frontmatter.title && <Typo class="title" text={projectContent.frontmatter.title} tag="h1" weight="black" color="secondary" size={['tr', 'sp']}} balancer/> }
-    {projectContent.frontmatter.logo && <img class="logo" src={projectContent.frontmatter.logo}  />}
+    {title && <Typo class="title" text={title} tag="h1" weight="black" color="secondary" size={['tr', 'sp']}} balancer/> }
+    <!--{logo && <img class="logo" src={logo} alt={title} />}-->
   </div>
 
   <Section maxWidth="sm" padding={["st", "uxxs"]}>
-    <MarkdownText class="content" text={projectContent.rawContent()} size={['lg', 'xxl']}/>
+    <MarkdownText class="content" text={content} size={['lg', 'xxl']}/>
   </Section>
-  
-  
+
+
   <Section maxWidth="sm" padding={["uxxs", "st"]}>
     <ProjectInfo info={[
       {
         label:t("label.year"),
-        date: projectContent.frontmatter.date
+        date
       },
       {
         label:t("label.stack"),
-        tags: projectContent.frontmatter.tags
+        tags
       },
       {
         label:t("label.website"),
-        url: projectContent.frontmatter.website
+        url: website
       },
       {
         label:t("label.git"),
-        url: projectContent.frontmatter.git
+        url: git
       }
     ]} />
   </Section>
@@ -119,7 +118,7 @@ export async function getStaticPaths() {
   }
   
   // Image
-  :global(.content) :global(img) {
-    background-color: var(--c-secondary);
-  }
+  /*:global(.content) :global(img) {*/
+  /*  background-color: var(--c-secondary);*/
+  /*}*/
 </style>

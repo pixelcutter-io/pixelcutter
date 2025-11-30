@@ -6,18 +6,32 @@ import WhatHome from "@/components/blocks/WhatHome.astro";
 import WhyHome from "@/components/blocks/WhyHome.astro";
 import Layout from "@/components/layouts/Layout.astro";
 import Section from "@/components/layouts/Section.astro";
+
+interface Feature {
+	key: string;
+	title: string;
+	text: string;
+	items?: Array<{ title: string; text: string }>;
+	steps?: Array<{ title: string; text: string }>;
+}
+
+const home = await import("../content/home.md");
+const features = home.frontmatter.features as Feature[];
+const why = features.find((f) => f.key === "why");
+const what = features.find((f) => f.key === "what");
+const how = features.find((f) => f.key === "how");
 ---
 
 <Layout theme="home">
-  <HeroHome />
+  <HeroHome text={home.frontmatter.text} />
   <Section bgColor="secondary">
-    <WhyHome />
+    <WhyHome title={why?.title} text={why?.text} />
   </Section>
   <Section>
-    <WhatHome />
+    <WhatHome title={what?.title} text={what?.text} items={what?.items} />
   </Section>
   <Section bgColor="secondary">
-    <HowHome/>
+    <HowHome title={how?.title} text={how?.text} steps={how?.steps} />
   </Section>
   <Section>
     <ContactsCta />

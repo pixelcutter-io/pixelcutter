@@ -18,9 +18,9 @@ const { logo, title, url, excerpt, cover, date } = Astro.props;
   <article class="card">
     {date && <Typo class="date" text={date} weight="semi" color="accent" size={['lg', 'xxl']}/> }
     {title && <Typo class="title" text={title} tag="h3" weight="black" color="secondary" size={['tr', 'qt']} balancer/> }
-    {logo && <img class="logo" src={logo}  />}
+    <!--{logo && <img class="logo" src={logo}  />}-->
     {excerpt && <MarkdownText class="excerpt" text={excerpt} size={['lg', 'xxl']} />}
-    {cover && <img class="cover" src={cover} loading="lazy" /> }
+    {cover && <img class="cover" src={cover} alt={title} loading="lazy" /> }
   </article>
 </a>
 
@@ -90,12 +90,12 @@ const { logo, title, url, excerpt, cover, date } = Astro.props;
   aspect-ratio: 16/9;
   object-fit: cover;
   margin-top: 2rem;
-  background-color: var(--c-secondary);
+  /*background-color: var(--c-secondary);*/
 
-  @include media(lg) {
-    width: calc(100% + 10rem);
-    margin-inline: -5rem;
-  }
+  /*@include media(lg) {*/
+  /*  width: calc(100% + 10rem);*/
+  /*  margin-inline: -5rem;*/
+  /*}*/
 }
 
 // If has logo hide title

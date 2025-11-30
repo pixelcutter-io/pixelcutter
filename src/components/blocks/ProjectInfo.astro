@@ -28,8 +28,8 @@ if (!filteredInfo.length) return;
     <div class="info">
       <Typo text={item.label} size={['df', 'xxl']}/>
       {item.date && <Typo class="date" text={new Date(item.date).getFullYear().toString()} weight="semi" color="accent" size={['lg', 'tr']}/>}
-      {item.url && <a href={`https://${item.url}`} target="_blank">
-        <Typo class="date" text={item.url} weight="semi" color="accent" size={['lg', 'tr']}/>
+      {item.url && <a class="link" href={`https://${item.url}`} target="_blank">
+        <Typo text={item.url} weight="semi" color="accent" size={['lg', 'tr']}/>
       </a>}
       {item.tags &&
         <div class="tags">
@@ -56,5 +56,9 @@ if (!filteredInfo.length) return;
     display: flex;
     flex-wrap: wrap;
     gap: var(--s-df);
+  }
+  
+  .link:hover :global(*) {
+    text-decoration: underline;
   }
 </style>

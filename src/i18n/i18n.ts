@@ -1,15 +1,8 @@
 import en from "./langs/en.json";
-import it from "./langs/it.json";
 
-export const ui = { en, it } as const;
+export const ui = { en } as const;
 export const DEFAULT_LANG = "en";
 export const LANGUAGES = Object.keys(ui) as Array<keyof typeof ui>;
-
-export function getLangFromUrl(url: URL) {
-	const [, lang] = url.pathname.split("/");
-	if (lang in ui) return lang as keyof typeof ui;
-	return DEFAULT_LANG;
-}
 
 export function useTranslations(lang: keyof typeof ui) {
 	return function t(
@@ -41,5 +34,5 @@ export function getLocalizedUrl(
 }
 
 export function getStaticPaths() {
-	return [{ params: { lang: "en" } }, { params: { lang: "it" } }];
+	return [{ params: { lang: "en" } }];
 }

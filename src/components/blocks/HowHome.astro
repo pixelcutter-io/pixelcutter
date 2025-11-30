@@ -1,16 +1,19 @@
 ---
 import MarkdownText from "@/components/typography/MarkdownText.astro";
 import Typo from "@/components/typography/Typo.astro";
-import { useTranslations } from "@/i18n/i18n";
 
-const t = useTranslations("en");
+interface Props {
+  title?: string;
+  text?: string;
+  steps?: Array<{ title: string; text: string }>;
+}
 
-const steps = ["idea", "research", "design", "development", "result"];
+const { title, text, steps = [] } = Astro.props;
 ---
 <div class="how">
   <article>
-    <Typo class="title" text={t('home.how.title')} tag="h2" weight="black" color="primary" size={['tr', 'qt']} balancer />
-    <MarkdownText text={t('home.how.text')} color="primary" size={['lg', 'xxl']}  />
+    {title && <Typo class="title" text={title} tag="h2" weight="black" color="primary" size={['tr', 'qt']} balancer />}
+    {text && <MarkdownText text={text} color="primary" size={['lg', 'xxl']}  />}
   </article>
   <div class="list">
     {steps.map((step, index) => (
@@ -19,8 +22,8 @@ const steps = ["idea", "research", "design", "development", "result"];
             <Typo text={index + 1} tag="p" weight="black" color="primary" size={['xxl', 'big']} balancer />
           </div>
           <article class="article">
-            <Typo class="title" text={t(`home.how_step.${step}.title`)} tag="h3" weight="black" color="primary" size={['xxl', 'tr']} balancer />
-            <MarkdownText text={t(`home.how_step.${step}.text`)} color="primary" size={['lg', 'xxl']}  />
+            <Typo class="title" text={step.title} tag="h3" weight="black" color="primary" size={['xxl', 'tr']} balancer />
+            <MarkdownText text={step.text} color="primary" size={['lg', 'xxl']}  />
           </article>
         </div>
       )
