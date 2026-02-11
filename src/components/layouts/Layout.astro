@@ -29,6 +29,10 @@ const { theme = "default" } = Astro.props;
 	  <slot />
 		<Footer />
 	</main>
+	<script>
+		import { inject } from "@vercel/analytics";
+		inject();
+	</script>
 	</body>
 </html>
 
